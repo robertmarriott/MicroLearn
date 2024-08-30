@@ -19,8 +19,6 @@ public class Course : AggregateRoot<CourseId>
     public IReadOnlyCollection<CourseModule> Modules =>
         _modules.AsReadOnly();
 
-    private Course() { }
-
     private Course(
         CourseId id,
         InstructorId instructorId,
