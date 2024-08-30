@@ -8,10 +8,7 @@ public class AggregateRoot<TId> : Entity<TId> where TId : notnull
 
     protected AggregateRoot() { }
 
-    protected AggregateRoot(TId id)
-    {
-        Id = id;
-    }
+    protected AggregateRoot(TId id) : base(id) { }
 
     public void AddDomainEvent(IDomainEvent domainEvent)
     {
