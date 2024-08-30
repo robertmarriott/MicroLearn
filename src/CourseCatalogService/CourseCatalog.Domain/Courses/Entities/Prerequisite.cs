@@ -6,8 +6,6 @@ public class Prerequisite : Entity<PrerequisiteId>
 {
     public string Description { get; private set; } = null!;
 
-    private Prerequisite() { }
-
     private Prerequisite(PrerequisiteId id, string description) : base(id)
     {
         Description = description;
