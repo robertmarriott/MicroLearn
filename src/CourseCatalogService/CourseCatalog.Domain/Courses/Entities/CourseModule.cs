@@ -8,8 +8,6 @@ public class CourseModule : Entity<CourseModuleId>
     public string Title { get; private set; } = null!;
     public string Summary { get; private set; } = null!;
 
-    private CourseModule() { }
-
     private CourseModule(
         CourseModuleId id, short moduleNumber, string title, string summary)
         : base(id)
