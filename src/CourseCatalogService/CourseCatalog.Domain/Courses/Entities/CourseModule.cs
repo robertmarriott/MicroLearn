@@ -2,7 +2,7 @@
 
 namespace CourseCatalog.Domain.Courses.Entities;
 
-public class CourseModule : Entity
+public class CourseModule : Entity<CourseModuleId>
 {
     public short ModuleNumber { get; private set; }
     public string Title { get; private set; } = null!;
@@ -10,7 +10,9 @@ public class CourseModule : Entity
 
     private CourseModule() { }
 
-    private CourseModule(short moduleNumber, string title, string summary)
+    private CourseModule(
+        CourseModuleId id, short moduleNumber, string title, string summary)
+        : base(id)
     {
         ModuleNumber = moduleNumber;
         Title = title;
@@ -18,16 +20,14 @@ public class CourseModule : Entity
     }
 
     public static CourseModule Create(
-        short moduleNumber,
-        string title,
-        string summary)
+        short moduleNumber, string title, string summary)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(
-            moduleNumber,
-            nameof(moduleNumber));
+            moduleNumber, nameof(moduleNumber));
         ArgumentNullException.ThrowIfNullOrEmpty(title, nameof(title));
         ArgumentNullException.ThrowIfNullOrEmpty(summary, nameof(summary));
 
-        return new CourseModule(moduleNumber, title, summary);
+        return new CourseModule(
+            new CourseModuleId(Guid.NewGuid()), moduleNumber, title, summary);
     }
 }
