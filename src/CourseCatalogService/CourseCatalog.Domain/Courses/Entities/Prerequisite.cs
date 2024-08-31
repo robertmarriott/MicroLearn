@@ -4,19 +4,22 @@ namespace CourseCatalog.Domain.Courses.Entities;
 
 public class Prerequisite : Entity<PrerequisiteId>
 {
-    public string Description { get; private set; } = null!;
+    public CourseId CourseId { get; private init; }
+    public string Description { get; private set; }
 
-    private Prerequisite(PrerequisiteId id, string description) : base(id)
+    private Prerequisite(
+        PrerequisiteId id, CourseId courseId, string description) : base(id)
     {
+        CourseId = courseId;
         Description = description;
     }
 
-    public static Prerequisite Create(string description)
+    public static Prerequisite Create(CourseId courseId, string description)
     {
         ArgumentNullException.ThrowIfNullOrEmpty(
             description, nameof(description));
 
         return new Prerequisite(
-            new PrerequisiteId(Guid.NewGuid()), description);
+            new PrerequisiteId(Guid.NewGuid()), courseId, description);
     }
 }

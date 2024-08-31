@@ -5,9 +5,9 @@ namespace CourseCatalog.Domain.Courses.Entities;
 
 public class Course : AggregateRoot<CourseId>
 {
-    public InstructorId InstructorId { get; private set; }
-    public string Title { get; private set; } = null!;
-    public string Description { get; private set; } = null!;
+    public InstructorId InstructorId { get; private init; }
+    public string Title { get; private set; }
+    public string Description { get; private set; }
     public DateOnly StartDate { get; private set; }
     public DateOnly EndDate { get; private set; }
 
@@ -41,19 +41,26 @@ public class Course : AggregateRoot<CourseId>
         DateOnly startDate,
         DateOnly endDate)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(
-            title, nameof(title));
+        ArgumentNullException.ThrowIfNullOrEmpty(title, nameof(title));
+
         ArgumentNullException.ThrowIfNullOrEmpty(
             description, nameof(description));
+
         ArgumentOutOfRangeException.ThrowIfLessThan(
-            startDate, DateOnly.FromDateTime(DateTime.UtcNow),
+            startDate,
+            DateOnly.FromDateTime(DateTime.UtcNow),
             nameof(startDate));
+
         ArgumentOutOfRangeException.ThrowIfLessThan(
             endDate, startDate, nameof(endDate));
 
         return new Course(
-            new CourseId(Guid.NewGuid()), instructorId, title,
-            description, startDate, endDate);
+            new CourseId(Guid.NewGuid()),
+            instructorId,
+            title,
+            description,
+            startDate,
+            endDate);
     }
 
     public void AddModule(CourseModule module)
