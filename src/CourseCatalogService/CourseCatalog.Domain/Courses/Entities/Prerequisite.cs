@@ -19,7 +19,6 @@ public class Prerequisite : Entity<PrerequisiteId>
         ArgumentNullException.ThrowIfNullOrEmpty(
             description, nameof(description));
 
-        return new Prerequisite(
-            new PrerequisiteId(Guid.NewGuid()), courseId, description);
+        return new Prerequisite(new PrerequisiteId(), courseId, description);
     }
 }

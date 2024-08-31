@@ -55,7 +55,7 @@ public class Course : AggregateRoot<CourseId>
             endDate, startDate, nameof(endDate));
 
         return new Course(
-            new CourseId(Guid.NewGuid()),
+            new CourseId(),
             instructorId,
             title,
             description,

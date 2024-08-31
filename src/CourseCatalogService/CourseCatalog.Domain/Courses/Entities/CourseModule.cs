@@ -23,10 +23,7 @@ public class CourseModule : Entity<CourseModuleId>
     }
 
     public static CourseModule Create(
-        CourseId courseId,
-        short moduleNumber,
-        string title,
-        string summary)
+        CourseId courseId, short moduleNumber, string title, string summary)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(
             moduleNumber, nameof(moduleNumber));
@@ -36,10 +33,6 @@ public class CourseModule : Entity<CourseModuleId>
         ArgumentNullException.ThrowIfNullOrEmpty(summary, nameof(summary));
 
         return new CourseModule(
-            new CourseModuleId(Guid.NewGuid()),
-            courseId,
-            moduleNumber,
-            title,
-            summary);
+            new CourseModuleId(), courseId, moduleNumber, title, summary);
     }
 }
