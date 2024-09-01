@@ -1,6 +1,6 @@
 namespace CourseCatalog.Domain.Common;
 
-public abstract class ValueObject
+public abstract class ValueObject : IEquatable<ValueObject>
 {
     protected abstract IEnumerable<object> GetEqualityComponents();
 
@@ -11,6 +11,11 @@ public abstract class ValueObject
         return GetEqualityComponents()
             .Aggregate(0, (hash, value) =>
                 hash * HashMultiplier ^ (value?.GetHashCode() ?? 0));
+    }
+
+    public bool Equals(ValueObject? other)
+    {
+        return other is not null && Equals((object?)other);
     }
 
     public override bool Equals(object? obj)
