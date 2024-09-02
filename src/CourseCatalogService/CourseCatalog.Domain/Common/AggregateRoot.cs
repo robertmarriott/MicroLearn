@@ -10,7 +10,7 @@ public class AggregateRoot<TId> : Entity<TId> where TId : notnull
 
     protected AggregateRoot(TId id) : base(id) { }
 
-    public void AddDomainEvent(IDomainEvent domainEvent)
+    public void RaiseDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }
