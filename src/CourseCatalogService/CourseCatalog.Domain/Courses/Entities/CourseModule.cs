@@ -37,25 +37,26 @@ public class CourseModule : Entity<CourseModuleId>
             new CourseModuleId(), courseId, moduleNumber, title, summary);
     }
 
-    public void UpdateModuleNumber(short moduleNumber)
+    public void ChangeModuleNumber(short newModuleNumber)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(
-            moduleNumber, nameof(moduleNumber));
+            newModuleNumber, nameof(newModuleNumber));
 
-        ModuleNumber = moduleNumber;
+        ModuleNumber = newModuleNumber;
     }
 
-    public void UpdateTitle(string title)
+    public void ChangeTitle(string newTitle)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(title, nameof(title));
+        ArgumentNullException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
 
-        Title = title;
+        Title = newTitle;
     }
 
-    public void UpdateSummary(string summary)
+    public void ChangeSummary(string newSummary)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(summary, nameof(summary));
+        ArgumentNullException.ThrowIfNullOrEmpty(
+            newSummary, nameof(newSummary));
 
-        Summary = summary;
+        Summary = newSummary;
     }
 }

@@ -64,37 +64,37 @@ public class Course : AggregateRoot<CourseId>
             endDate);
     }
 
-    public void UpdateTitle(string title)
+    public void ChangeTitle(string newTitle)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(title, nameof(title));
+        ArgumentNullException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
 
-        Title = title;
+        Title = newTitle;
     }
 
-    public void UpdateDescription(string description)
+    public void ChangeDescription(string newDescription)
     {
         ArgumentNullException.ThrowIfNullOrEmpty(
-            description, nameof(description));
+            newDescription, nameof(newDescription));
 
-        Description = description;
+        Description = newDescription;
     }
 
-    public void UpdateStartDate(DateOnly startDate)
+    public void ChangeStartDate(DateOnly newStartDate)
     {
         ArgumentOutOfRangeException.ThrowIfLessThan(
-            startDate,
+            newStartDate,
             DateOnly.FromDateTime(DateTime.UtcNow),
-            nameof(startDate));
+            nameof(newStartDate));
 
-        StartDate = startDate;
+        StartDate = newStartDate;
     }
 
-    public void UpdateEndDate(DateOnly endDate)
+    public void ChangeEndDate(DateOnly newEndDate)
     {
         ArgumentOutOfRangeException.ThrowIfLessThan(
-            endDate, StartDate, nameof(endDate));
+            newEndDate, StartDate, nameof(newEndDate));
 
-        EndDate = endDate;
+        EndDate = newEndDate;
     }
 
     public void AddModule(CourseModule module)

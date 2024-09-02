@@ -23,11 +23,11 @@ public class Prerequisite : Entity<PrerequisiteId>
         return new Prerequisite(new PrerequisiteId(), courseId, description);
     }
 
-    public void UpdateDescription(string description)
+    public void ChangeDescription(string newDescription)
     {
         ArgumentNullException.ThrowIfNullOrEmpty(
-            description, nameof(description));
+            newDescription, nameof(newDescription));
 
-        Description = description;
+        Description = newDescription;
     }
 }
