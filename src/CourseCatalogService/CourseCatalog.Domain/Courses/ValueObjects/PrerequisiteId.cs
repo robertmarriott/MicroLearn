@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Domain.Courses.Entities;
+﻿namespace CourseCatalog.Domain.Courses.ValueObjects;
 
 public readonly record struct PrerequisiteId(Guid Value)
 {

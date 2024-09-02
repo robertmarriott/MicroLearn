@@ -1,5 +1,6 @@
 ﻿using CourseCatalog.Domain.Common;
-using CourseCatalog.Domain.Instructors.Entities;
+using CourseCatalog.Domain.Courses.ValueObjects;
+using CourseCatalog.Domain.Instructors.ValueObjects;
 
 namespace CourseCatalog.Domain.Courses.Entities;
 

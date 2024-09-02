@@ -1,4 +1,5 @@
 ﻿using CourseCatalog.Domain.Common;
+using CourseCatalog.Domain.Courses.ValueObjects;
 
 namespace CourseCatalog.Domain.Courses.Entities;
 
