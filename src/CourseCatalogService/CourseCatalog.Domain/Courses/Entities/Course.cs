@@ -5,7 +5,7 @@ namespace CourseCatalog.Domain.Courses.Entities;
 
 public class Course : AggregateRoot<CourseId>
 {
-    public InstructorId InstructorId { get; private init; }
+    public InstructorId InstructorId { get; }
     public string Title { get; private set; }
     public string Description { get; private set; }
     public DateOnly StartDate { get; private set; }
@@ -61,6 +61,39 @@ public class Course : AggregateRoot<CourseId>
             description,
             startDate,
             endDate);
+    }
+
+    public void UpdateTitle(string title)
+    {
+        ArgumentNullException.ThrowIfNullOrEmpty(title, nameof(title));
+
+        Title = title;
+    }
+
+    public void UpdateDescription(string description)
+    {
+        ArgumentNullException.ThrowIfNullOrEmpty(
+            description, nameof(description));
+
+        Description = description;
+    }
+
+    public void UpdateStartDate(DateOnly startDate)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(
+            startDate,
+            DateOnly.FromDateTime(DateTime.UtcNow),
+            nameof(startDate));
+
+        StartDate = startDate;
+    }
+
+    public void UpdateEndDate(DateOnly endDate)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(
+            endDate, StartDate, nameof(endDate));
+
+        EndDate = endDate;
     }
 
     public void AddModule(CourseModule module)
