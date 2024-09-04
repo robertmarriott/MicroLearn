@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Domain.Courses.ValueObjects;
+﻿namespace CourseCatalog.Domain.Courses;
 
 public readonly record struct CourseId(Guid Value)
 {

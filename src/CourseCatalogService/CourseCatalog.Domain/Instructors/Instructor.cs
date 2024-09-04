@@ -1,7 +1,6 @@
 ﻿using CourseCatalog.Domain.Common;
-using CourseCatalog.Domain.Instructors.ValueObjects;
 
-namespace CourseCatalog.Domain.Instructors.Entities;
+namespace CourseCatalog.Domain.Instructors;
 
 public class Instructor : AggregateRoot<InstructorId>
 {

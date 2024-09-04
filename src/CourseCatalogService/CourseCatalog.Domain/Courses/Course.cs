@@ -1,8 +1,7 @@
 ﻿using CourseCatalog.Domain.Common;
-using CourseCatalog.Domain.Courses.ValueObjects;
-using CourseCatalog.Domain.Instructors.ValueObjects;
+using CourseCatalog.Domain.Instructors;
 
-namespace CourseCatalog.Domain.Courses.Entities;
+namespace CourseCatalog.Domain.Courses;
 
 public class Course : AggregateRoot<CourseId>
 {
