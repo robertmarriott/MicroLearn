@@ -1,7 +1,4 @@
-﻿using CourseCatalog.Domain.Common;
-using CourseCatalog.Domain.Instructors;
-
-namespace CourseCatalog.Domain.Courses;
+﻿namespace CourseCatalog.Domain.Entities;
 
 public class Course : AggregateRoot<CourseId>
 {
@@ -41,9 +38,9 @@ public class Course : AggregateRoot<CourseId>
         DateOnly startDate,
         DateOnly endDate)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(title, nameof(title));
+        ArgumentException.ThrowIfNullOrEmpty(title, nameof(title));
 
-        ArgumentNullException.ThrowIfNullOrEmpty(
+        ArgumentException.ThrowIfNullOrEmpty(
             description, nameof(description));
 
         ArgumentOutOfRangeException.ThrowIfLessThan(
@@ -65,14 +62,14 @@ public class Course : AggregateRoot<CourseId>
 
     public void ChangeTitle(string newTitle)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
+        ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
 
         Title = newTitle;
     }
 
     public void ChangeDescription(string newDescription)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(
+        ArgumentException.ThrowIfNullOrEmpty(
             newDescription, nameof(newDescription));
 
         Description = newDescription;

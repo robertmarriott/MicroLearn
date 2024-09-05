@@ -1,6 +1,4 @@
-﻿using CourseCatalog.Domain.Common;
-
-namespace CourseCatalog.Domain.Instructors;
+﻿namespace CourseCatalog.Domain.Entities;
 
 public class Instructor : AggregateRoot<InstructorId>
 {
@@ -17,10 +15,10 @@ public class Instructor : AggregateRoot<InstructorId>
 
     public static Instructor Create(string firstName, string lastName)
     {
-        ArgumentNullException.ThrowIfNullOrWhiteSpace(
+        ArgumentException.ThrowIfNullOrWhiteSpace(
             firstName, nameof(firstName));
 
-        ArgumentNullException.ThrowIfNullOrWhiteSpace(
+        ArgumentException.ThrowIfNullOrWhiteSpace(
             lastName, nameof(lastName));
 
         return new Instructor(new InstructorId(), firstName, lastName);

@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Domain.Courses;
+﻿namespace CourseCatalog.Domain.Repositories;
 
 public interface ICourseRepository
 {

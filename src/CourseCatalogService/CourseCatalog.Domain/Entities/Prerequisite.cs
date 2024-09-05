@@ -1,6 +1,4 @@
-﻿using CourseCatalog.Domain.Common;
-
-namespace CourseCatalog.Domain.Courses;
+﻿namespace CourseCatalog.Domain.Entities;
 
 public class Prerequisite : Entity<PrerequisiteId>
 {
@@ -16,7 +14,7 @@ public class Prerequisite : Entity<PrerequisiteId>
 
     public static Prerequisite Create(CourseId courseId, string description)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(
+        ArgumentException.ThrowIfNullOrEmpty(
             description, nameof(description));
 
         return new Prerequisite(new PrerequisiteId(), courseId, description);
@@ -24,7 +22,7 @@ public class Prerequisite : Entity<PrerequisiteId>
 
     public void ChangeDescription(string newDescription)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(
+        ArgumentException.ThrowIfNullOrEmpty(
             newDescription, nameof(newDescription));
 
         Description = newDescription;

@@ -1,6 +1,4 @@
-﻿using CourseCatalog.Domain.Common;
-
-namespace CourseCatalog.Domain.Courses;
+﻿namespace CourseCatalog.Domain.Entities;
 
 public class CourseModule : Entity<CourseModuleId>
 {
@@ -28,9 +26,9 @@ public class CourseModule : Entity<CourseModuleId>
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(
             moduleNumber, nameof(moduleNumber));
 
-        ArgumentNullException.ThrowIfNullOrEmpty(title, nameof(title));
+        ArgumentException.ThrowIfNullOrEmpty(title, nameof(title));
 
-        ArgumentNullException.ThrowIfNullOrEmpty(summary, nameof(summary));
+        ArgumentException.ThrowIfNullOrEmpty(summary, nameof(summary));
 
         return new CourseModule(
             new CourseModuleId(), courseId, moduleNumber, title, summary);
@@ -46,14 +44,14 @@ public class CourseModule : Entity<CourseModuleId>
 
     public void ChangeTitle(string newTitle)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
+        ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
 
         Title = newTitle;
     }
 
     public void ChangeSummary(string newSummary)
     {
-        ArgumentNullException.ThrowIfNullOrEmpty(
+        ArgumentException.ThrowIfNullOrEmpty(
             newSummary, nameof(newSummary));
 
         Summary = newSummary;
