@@ -29,6 +29,7 @@ public class Course : AggregateRoot<CourseId>
         InstructorId = instructorId;
         Title = title;
         Description = description;
+        SkillLevel = skillLevel;
         StartDate = startDate;
         EndDate = endDate;
     }
@@ -102,23 +103,38 @@ public class Course : AggregateRoot<CourseId>
         EndDate = newEndDate;
     }
 
-    public void AddModule(CourseModule module)
+    public void AddPrerequisite(string description)
     {
-        _modules.Add(module);
+        _prerequisites.Add(Prerequisite.Create(Id, description));
     }
 
-    public void RemoveModule(CourseModule module)
+    public void RemovePrerequisite(PrerequisiteId prerequisiteId)
     {
-        _modules.Remove(module);
-    }
+        var prerequisite = _prerequisites
+            .FirstOrDefault(p => p.Id == prerequisiteId);
 
-    public void AddPrerequisite(Prerequisite prerequisite)
-    {
-        _prerequisites.Add(prerequisite);
-    }
+        if (prerequisite is null)
+        {
+            // TODO: throw domain exception
+        }
 
-    public void RemovePrerequisite(Prerequisite prerequisite)
-    {
         _prerequisites.Remove(prerequisite);
+    }
+
+    public void AddModule(short moduleNumber, string title, string summary)
+    {
+        _modules.Add(CourseModule.Create(Id, moduleNumber, title, summary));
+    }
+
+    public void RemoveModule(CourseModuleId moduleId)
+    {
+        var module = _modules.FirstOrDefault(m => m.Id == moduleId);
+
+        if (module is null)
+        {
+            // TODO: throw domain exception
+        }
+
+        _modules.Remove(module);
     }
 }

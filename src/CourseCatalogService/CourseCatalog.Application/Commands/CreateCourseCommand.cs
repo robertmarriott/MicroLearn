@@ -6,9 +6,7 @@ public record class CreateCourseCommand(
     string Description,
     SkillLevel SkillLevel,
     DateOnly StartDate,
-    DateOnly EndDate,
-    IEnumerable<PrerequisiteDto>? Prequisites = null,
-    IEnumerable<CourseModuleDto>? Modules = null) : IRequest<CourseId>;
+    DateOnly EndDate) : IRequest<CourseId>;
 
 public class CreateCourseHandler(ICourseRepository repository)
     : IRequestHandler<CreateCourseCommand, CourseId>
@@ -23,28 +21,6 @@ public class CreateCourseHandler(ICourseRepository repository)
             request.SkillLevel,
             request.StartDate,
             request.EndDate);
-
-        if (request.Prequisites is not null)
-        {
-            foreach (var prerequisite in request.Prequisites)
-            {
-                course.AddPrerequisite(
-                    Prerequisite.Create(course.Id, prerequisite.Description));
-            }
-        }
-
-        if (request.Modules is not null)
-        {
-            foreach (var module in request.Modules)
-            {
-                course.AddModule(
-                    CourseModule.Create(
-                        course.Id,
-                        module.ModuleNumber,
-                        module.Title,
-                        module.Summary));
-            }
-        }
 
         await repository.AddAsync(course);
 
