@@ -7,7 +7,7 @@ public record class CreateCourseCommand(
     DateOnly StartDate,
     DateOnly EndDate) : IRequest<CourseId>;
 
-public class CreateCourseHandler(ICourseRepository courseRepository)
+public class CreateCourseHandler(ICourseRepository repository)
     : IRequestHandler<CreateCourseCommand, CourseId>
 {
     public async Task<CourseId> Handle(
@@ -20,7 +20,7 @@ public class CreateCourseHandler(ICourseRepository courseRepository)
             request.StartDate,
             request.EndDate);
 
-        await courseRepository.AddAsync(course);
+        await repository.AddAsync(course);
 
         return course.Id;
     }
