@@ -5,6 +5,7 @@ public class Course : AggregateRoot<CourseId>
     public InstructorId InstructorId { get; }
     public string Title { get; private set; }
     public string Description { get; private set; }
+    public SkillLevel SkillLevel { get; private set; }
     public DateOnly StartDate { get; private set; }
     public DateOnly EndDate { get; private set; }
 
@@ -21,6 +22,7 @@ public class Course : AggregateRoot<CourseId>
         InstructorId instructorId,
         string title,
         string description,
+        SkillLevel skillLevel,
         DateOnly startDate,
         DateOnly endDate) : base(id)
     {
@@ -35,6 +37,7 @@ public class Course : AggregateRoot<CourseId>
         InstructorId instructorId,
         string title,
         string description,
+        SkillLevel skillLevel,
         DateOnly startDate,
         DateOnly endDate)
     {
@@ -56,6 +59,7 @@ public class Course : AggregateRoot<CourseId>
             instructorId,
             title,
             description,
+            skillLevel,
             startDate,
             endDate);
     }
@@ -73,6 +77,11 @@ public class Course : AggregateRoot<CourseId>
             newDescription, nameof(newDescription));
 
         Description = newDescription;
+    }
+
+    public void ChangeSkillLevel(SkillLevel skillLevel)
+    {
+        SkillLevel = skillLevel;
     }
 
     public void ChangeStartDate(DateOnly newStartDate)

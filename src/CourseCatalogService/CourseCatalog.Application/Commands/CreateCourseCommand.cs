@@ -4,6 +4,7 @@ public record class CreateCourseCommand(
     InstructorId InstructorId,
     string Title,
     string Description,
+    SkillLevel SkillLevel,
     DateOnly StartDate,
     DateOnly EndDate) : IRequest<CourseId>;
 
@@ -17,6 +18,7 @@ public class CreateCourseHandler(ICourseRepository repository)
             request.InstructorId,
             request.Title,
             request.Description,
+            request.SkillLevel,
             request.StartDate,
             request.EndDate);
 
