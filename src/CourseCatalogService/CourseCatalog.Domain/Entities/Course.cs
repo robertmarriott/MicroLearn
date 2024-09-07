@@ -44,13 +44,18 @@ public class Course : AggregateRoot<CourseId>
         ArgumentOutOfRangeException.ThrowIfLessThan(
             endDate, startDate, nameof(endDate));
 
-        return new Course(
+        var course = new Course(
             new CourseId(),
             instructorId,
             title,
             skillLevel,
             startDate,
             endDate);
+
+        course.RaiseDomainEvent(
+            new CourseCreatedEvent(course.InstructorId, course.Id));
+
+        return course;
     }
 
     public void ChangeTitle(string newTitle)
@@ -58,11 +63,15 @@ public class Course : AggregateRoot<CourseId>
         ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
 
         Title = newTitle;
+
+        RaiseDomainEvent(new CourseTitleChangedEvent(Id, Title));
     }
 
     public void ChangeSkillLevel(SkillLevel newSkillLevel)
     {
         SkillLevel = newSkillLevel;
+
+        RaiseDomainEvent(new CourseSkillLevelChangedEvent(Id, SkillLevel));
     }
 
     public void ChangeStartDate(DateOnly newStartDate)
@@ -73,6 +82,8 @@ public class Course : AggregateRoot<CourseId>
             nameof(newStartDate));
 
         StartDate = newStartDate;
+
+        RaiseDomainEvent(new CourseStartDateChangedEvent(Id, StartDate));
     }
 
     public void ChangeEndDate(DateOnly newEndDate)
@@ -81,12 +92,16 @@ public class Course : AggregateRoot<CourseId>
             newEndDate, StartDate, nameof(newEndDate));
 
         EndDate = newEndDate;
+
+        RaiseDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));
     }
 
     public PrerequisiteId AddPrerequisite(string description)
     {
         var prerequisite = Prerequisite.Create(Id, description);
         _prerequisites.Add(prerequisite);
+
+        RaiseDomainEvent(new PrerequisiteAddedEvent(Id, prerequisite.Id));
 
         return prerequisite.Id;
     }
@@ -102,5 +117,7 @@ public class Course : AggregateRoot<CourseId>
         }
 
         _prerequisites.Remove(prerequisite);
+
+        RaiseDomainEvent(new PrerequisiteRemovedEvent(Id, prerequisite.Id));
     }
 }
