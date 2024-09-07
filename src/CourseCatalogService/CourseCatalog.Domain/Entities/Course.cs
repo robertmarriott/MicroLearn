@@ -13,8 +13,8 @@ public class Course : AggregateRoot<CourseId>
     public IReadOnlyCollection<Prerequisite> Prerequisites =>
         _prerequisites.AsReadOnly();
 
-    private readonly List<CourseModule> _modules = [];
-    public IReadOnlyCollection<CourseModule> Modules =>
+    private readonly List<Module> _modules = [];
+    public IReadOnlyCollection<Module> Modules =>
         _modules.AsReadOnly();
 
     private Course(
@@ -115,7 +115,7 @@ public class Course : AggregateRoot<CourseId>
 
         if (prerequisite is null)
         {
-            // TODO: throw domain exception
+            throw new PrerequisiteNotFoundException(prerequisiteId);
         }
 
         _prerequisites.Remove(prerequisite);
@@ -123,16 +123,16 @@ public class Course : AggregateRoot<CourseId>
 
     public void AddModule(short moduleNumber, string title, string summary)
     {
-        _modules.Add(CourseModule.Create(Id, moduleNumber, title, summary));
+        _modules.Add(Module.Create(Id, moduleNumber, title, summary));
     }
 
-    public void RemoveModule(CourseModuleId moduleId)
+    public void RemoveModule(ModuleId moduleId)
     {
         var module = _modules.FirstOrDefault(m => m.Id == moduleId);
 
         if (module is null)
         {
-            // TODO: throw domain exception
+            throw new ModuleNotFoundException(moduleId);
         }
 
         _modules.Remove(module);

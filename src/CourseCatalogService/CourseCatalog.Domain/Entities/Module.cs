@@ -1,14 +1,14 @@
 ﻿namespace CourseCatalog.Domain.Entities;
 
-public class CourseModule : Entity<CourseModuleId>
+public class Module : Entity<ModuleId>
 {
     public CourseId CourseId { get; }
     public short ModuleNumber { get; private set; }
     public string Title { get; private set; }
     public string Summary { get; private set; }
 
-    private CourseModule(
-        CourseModuleId id,
+    private Module(
+        ModuleId id,
         CourseId courseId,
         short moduleNumber,
         string title,
@@ -20,7 +20,7 @@ public class CourseModule : Entity<CourseModuleId>
         Summary = summary;
     }
 
-    public static CourseModule Create(
+    public static Module Create(
         CourseId courseId, short moduleNumber, string title, string summary)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(
@@ -30,8 +30,8 @@ public class CourseModule : Entity<CourseModuleId>
 
         ArgumentException.ThrowIfNullOrEmpty(summary, nameof(summary));
 
-        return new CourseModule(
-            new CourseModuleId(), courseId, moduleNumber, title, summary);
+        return new Module(
+            new ModuleId(), courseId, moduleNumber, title, summary);
     }
 
     public void ChangeModuleNumber(short newModuleNumber)
