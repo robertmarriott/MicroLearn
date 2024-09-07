@@ -3,12 +3,11 @@
 public record class CreateCourseCommand(
     InstructorId InstructorId,
     string Title,
-    string Description,
     SkillLevel SkillLevel,
     DateOnly StartDate,
     DateOnly EndDate) : IRequest<CourseId>;
 
-public class CreateCourseHandler(ICourseRepository repository)
+public class CreateCourseHandler(ICourseRepository courseRepository)
     : IRequestHandler<CreateCourseCommand, CourseId>
 {
     public async Task<CourseId> Handle(
@@ -17,12 +16,11 @@ public class CreateCourseHandler(ICourseRepository repository)
         var course = Course.Create(
             request.InstructorId,
             request.Title,
-            request.Description,
             request.SkillLevel,
             request.StartDate,
             request.EndDate);
 
-        await repository.AddAsync(course);
+        await courseRepository.AddAsync(course);
 
         return course.Id;
     }

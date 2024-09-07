@@ -3,7 +3,7 @@
 public class Prerequisite : Entity<PrerequisiteId>
 {
     public CourseId CourseId { get; }
-    public string Description { get; private set; }
+    public string Description { get; }
 
     private Prerequisite(
         PrerequisiteId id, CourseId courseId, string description) : base(id)
@@ -18,13 +18,5 @@ public class Prerequisite : Entity<PrerequisiteId>
             description, nameof(description));
 
         return new Prerequisite(new PrerequisiteId(), courseId, description);
-    }
-
-    public void ChangeDescription(string newDescription)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(
-            newDescription, nameof(newDescription));
-
-        Description = newDescription;
     }
 }

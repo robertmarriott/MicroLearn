@@ -4,7 +4,6 @@ public class Course : AggregateRoot<CourseId>
 {
     public InstructorId InstructorId { get; }
     public string Title { get; private set; }
-    public string Description { get; private set; }
     public SkillLevel SkillLevel { get; private set; }
     public DateOnly StartDate { get; private set; }
     public DateOnly EndDate { get; private set; }
@@ -13,21 +12,16 @@ public class Course : AggregateRoot<CourseId>
     public IReadOnlyCollection<Prerequisite> Prerequisites =>
         _prerequisites.AsReadOnly();
 
-    private readonly List<Module> _modules = [];
-    public IReadOnlyCollection<Module> Modules => _modules.AsReadOnly();
-
     private Course(
         CourseId id,
         InstructorId instructorId,
         string title,
-        string description,
         SkillLevel skillLevel,
         DateOnly startDate,
         DateOnly endDate) : base(id)
     {
         InstructorId = instructorId;
         Title = title;
-        Description = description;
         SkillLevel = skillLevel;
         StartDate = startDate;
         EndDate = endDate;
@@ -36,15 +30,11 @@ public class Course : AggregateRoot<CourseId>
     public static Course Create(
         InstructorId instructorId,
         string title,
-        string description,
         SkillLevel skillLevel,
         DateOnly startDate,
         DateOnly endDate)
     {
         ArgumentException.ThrowIfNullOrEmpty(title, nameof(title));
-
-        ArgumentException.ThrowIfNullOrEmpty(
-            description, nameof(description));
 
         ArgumentOutOfRangeException.ThrowIfLessThan(
             startDate,
@@ -58,7 +48,6 @@ public class Course : AggregateRoot<CourseId>
             new CourseId(),
             instructorId,
             title,
-            description,
             skillLevel,
             startDate,
             endDate);
@@ -71,17 +60,9 @@ public class Course : AggregateRoot<CourseId>
         Title = newTitle;
     }
 
-    public void ChangeDescription(string newDescription)
+    public void ChangeSkillLevel(SkillLevel newSkillLevel)
     {
-        ArgumentException.ThrowIfNullOrEmpty(
-            newDescription, nameof(newDescription));
-
-        Description = newDescription;
-    }
-
-    public void ChangeSkillLevel(SkillLevel skillLevel)
-    {
-        SkillLevel = skillLevel;
+        SkillLevel = newSkillLevel;
     }
 
     public void ChangeStartDate(DateOnly newStartDate)
@@ -102,9 +83,12 @@ public class Course : AggregateRoot<CourseId>
         EndDate = newEndDate;
     }
 
-    public void AddPrerequisite(string description)
+    public PrerequisiteId AddPrerequisite(string description)
     {
-        _prerequisites.Add(Prerequisite.Create(Id, description));
+        var prerequisite = Prerequisite.Create(Id, description);
+        _prerequisites.Add(prerequisite);
+
+        return prerequisite.Id;
     }
 
     public void RemovePrerequisite(PrerequisiteId prerequisiteId)
@@ -118,22 +102,5 @@ public class Course : AggregateRoot<CourseId>
         }
 
         _prerequisites.Remove(prerequisite);
-    }
-
-    public void AddModule(short moduleNumber, string title, string summary)
-    {
-        _modules.Add(Module.Create(Id, moduleNumber, title, summary));
-    }
-
-    public void RemoveModule(ModuleId moduleId)
-    {
-        var module = _modules.FirstOrDefault(m => m.Id == moduleId);
-
-        if (module is null)
-        {
-            throw new ModuleNotFoundException(moduleId);
-        }
-
-        _modules.Remove(module);
     }
 }

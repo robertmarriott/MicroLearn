@@ -1,18 +1,21 @@
-﻿
-namespace CourseCatalog.Application.Commands;
+﻿namespace CourseCatalog.Application.Commands;
 
 public record class AddPrerequisiteCommand(
-    CourseId CourseId, string Description) : IRequest;
+    CourseId CourseId, string Description) : IRequest<PrerequisiteId>;
 
-public class AddPrerequisiteHandler(ICourseRepository repository)
-    : IRequestHandler<AddPrerequisiteCommand>
+public class AddPrerequisiteHandler(ICourseRepository courseRepository)
+    : IRequestHandler<AddPrerequisiteCommand, PrerequisiteId>
 {
-    public async Task Handle(
+    public async Task<PrerequisiteId> Handle(
         AddPrerequisiteCommand request, CancellationToken cancellationToken)
     {
-        var course = await repository.GetByIdAsync(request.CourseId);
+        var course = await courseRepository.GetByIdAsync(request.CourseId);
 
-        course?.AddPrerequisite(
-            Prerequisite.Create(course.Id, request.Description));
+        if (course is null)
+        {
+            throw new Exception(""); // TODO: Create custom exception
+        }
+
+        return course.AddPrerequisite(request.Description);
     }
 }
