@@ -14,8 +14,7 @@ public class Course : AggregateRoot<CourseId>
         _prerequisites.AsReadOnly();
 
     private readonly List<Module> _modules = [];
-    public IReadOnlyCollection<Module> Modules =>
-        _modules.AsReadOnly();
+    public IReadOnlyCollection<Module> Modules => _modules.AsReadOnly();
 
     private Course(
         CourseId id,
