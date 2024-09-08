@@ -10,12 +10,8 @@ public class ChangeCourseEndDateHandler(ICourseRepository courseRepository)
         ChangeCourseEndDateCommand request,
         CancellationToken cancellationToken)
     {
-        var course = await courseRepository.GetByIdAsync(request.CourseId);
-
-        if (course is null)
-        {
-            throw new CourseNotFoundException(request.CourseId);
-        }
+        var course = await courseRepository.GetByIdAsync(request.CourseId)
+            ?? throw new CourseNotFoundException(request.CourseId);
 
         course.ChangeEndDate(request.NewEndDate);
 

@@ -109,12 +109,8 @@ public class Course : AggregateRoot<CourseId>
     public void RemovePrerequisite(PrerequisiteId prerequisiteId)
     {
         var prerequisite = _prerequisites
-            .FirstOrDefault(p => p.Id == prerequisiteId);
-
-        if (prerequisite is null)
-        {
-            throw new PrerequisiteNotFoundException(prerequisiteId);
-        }
+            .FirstOrDefault(p => p.Id == prerequisiteId)
+            ?? throw new PrerequisiteNotFoundException(prerequisiteId);
 
         _prerequisites.Remove(prerequisite);
 

@@ -4,7 +4,6 @@ public class Instructor : AggregateRoot<InstructorId>
 {
     public string FirstName { get; }
     public string LastName { get; }
-    public string FullName => $"{FirstName} {LastName}";
 
     private Instructor(InstructorId id, string firstName, string lastName)
         : base(id)
