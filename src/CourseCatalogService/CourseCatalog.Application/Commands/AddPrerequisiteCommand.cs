@@ -13,7 +13,7 @@ public class AddPrerequisiteHandler(ICourseRepository courseRepository)
 
         if (course is null)
         {
-            throw new Exception(""); // TODO: Create custom exception
+            throw new CourseNotFoundException(request.CourseId);
         }
 
         return course.AddPrerequisite(request.Description);
