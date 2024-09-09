@@ -3,7 +3,8 @@
 public record class RemovePrerequisiteCommand(
     CourseId CourseId, PrerequisiteId PrerequisiteId) : IRequest<Unit>;
 
-public class RemovePrerequisiteHandler(ICourseRepository courseRepository)
+public class RemovePrerequisiteHandler(
+    ICourseRepository courseRepository, IUnitOfWork unitOfWork)
     : IRequestHandler<RemovePrerequisiteCommand, Unit>
 {
     public async Task<Unit> Handle(
@@ -13,6 +14,7 @@ public class RemovePrerequisiteHandler(ICourseRepository courseRepository)
             ?? throw new CourseNotFoundException(request.CourseId);
 
         course.RemovePrerequisite(request.PrerequisiteId);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
     }

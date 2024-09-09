@@ -8,7 +8,8 @@ public record class CreateCourseCommand(
     DateOnly EndDate,
     Price Price) : IRequest<CourseId>;
 
-public class CreateCourseHandler(ICourseRepository courseRepository)
+public class CreateCourseHandler(
+    ICourseRepository courseRepository, IUnitOfWork unitOfWork)
     : IRequestHandler<CreateCourseCommand, CourseId>
 {
     public async Task<CourseId> Handle(
@@ -23,6 +24,7 @@ public class CreateCourseHandler(ICourseRepository courseRepository)
             request.Price);
 
         await courseRepository.AddAsync(course);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return course.Id;
     }

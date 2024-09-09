@@ -1,10 +1,10 @@
-﻿
-namespace CourseCatalog.Application.Commands;
+﻿namespace CourseCatalog.Application.Commands;
 
 public record class ChangeCoursePriceCommand(
     CourseId CourseId, Price NewPrice) : IRequest<Unit>;
 
-public class ChangeCoursePriceHandler(ICourseRepository courseRepository)
+public class ChangeCoursePriceHandler(
+    ICourseRepository courseRepository, IUnitOfWork unitOfWork)
     : IRequestHandler<ChangeCoursePriceCommand, Unit>
 {
     public async Task<Unit> Handle(
@@ -14,6 +14,7 @@ public class ChangeCoursePriceHandler(ICourseRepository courseRepository)
             ?? throw new CourseNotFoundException(request.CourseId);
 
         course.ChangePrice(request.NewPrice);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
     }
