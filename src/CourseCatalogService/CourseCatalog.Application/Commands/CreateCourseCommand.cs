@@ -5,7 +5,8 @@ public record class CreateCourseCommand(
     string Title,
     SkillLevel SkillLevel,
     DateOnly StartDate,
-    DateOnly EndDate) : IRequest<CourseId>;
+    DateOnly EndDate,
+    Price Price) : IRequest<CourseId>;
 
 public class CreateCourseHandler(ICourseRepository courseRepository)
     : IRequestHandler<CreateCourseCommand, CourseId>
@@ -18,7 +19,8 @@ public class CreateCourseHandler(ICourseRepository courseRepository)
             request.Title,
             request.SkillLevel,
             request.StartDate,
-            request.EndDate);
+            request.EndDate,
+            request.Price);
 
         await courseRepository.AddAsync(course);
 

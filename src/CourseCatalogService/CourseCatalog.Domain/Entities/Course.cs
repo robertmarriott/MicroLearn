@@ -7,10 +7,11 @@ public class Course : AggregateRoot<CourseId>
     public SkillLevel SkillLevel { get; private set; }
     public DateOnly StartDate { get; private set; }
     public DateOnly EndDate { get; private set; }
+    public Price Price { get; private set; }
 
     private readonly List<Prerequisite> _prerequisites = [];
     public IReadOnlyCollection<Prerequisite> Prerequisites =>
-        _prerequisites.AsReadOnly();
+    _prerequisites.AsReadOnly();
 
     private Course(
         CourseId id,
@@ -18,13 +19,15 @@ public class Course : AggregateRoot<CourseId>
         string title,
         SkillLevel skillLevel,
         DateOnly startDate,
-        DateOnly endDate) : base(id)
+        DateOnly endDate,
+        Price price) : base(id)
     {
         InstructorId = instructorId;
         Title = title;
         SkillLevel = skillLevel;
         StartDate = startDate;
         EndDate = endDate;
+        Price = price;
     }
 
     public static Course Create(
@@ -32,7 +35,8 @@ public class Course : AggregateRoot<CourseId>
         string title,
         SkillLevel skillLevel,
         DateOnly startDate,
-        DateOnly endDate)
+        DateOnly endDate,
+        Price price)
     {
         ArgumentException.ThrowIfNullOrEmpty(title, nameof(title));
 
@@ -50,7 +54,8 @@ public class Course : AggregateRoot<CourseId>
             title,
             skillLevel,
             startDate,
-            endDate);
+            endDate,
+            price);
 
         course.RaiseDomainEvent(
             new CourseCreatedEvent(course.InstructorId, course.Id));
@@ -94,6 +99,13 @@ public class Course : AggregateRoot<CourseId>
         EndDate = newEndDate;
 
         RaiseDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));
+    }
+
+    public void ChangePrice(Price newPrice)
+    {
+        Price = newPrice;
+
+        RaiseDomainEvent(new CoursePriceChangedEvent(Id, Price));
     }
 
     public PrerequisiteId AddPrerequisite(string description)
