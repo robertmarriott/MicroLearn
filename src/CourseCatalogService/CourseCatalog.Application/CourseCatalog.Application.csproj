@@ -16,8 +16,4 @@
     <ProjectReference Include="..\CourseCatalog.Domain\CourseCatalog.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
 </Project>
