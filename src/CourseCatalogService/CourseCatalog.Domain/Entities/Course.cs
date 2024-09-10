@@ -11,7 +11,7 @@ public class Course : AggregateRoot<CourseId>
 
     private readonly List<Prerequisite> _prerequisites = [];
     public IReadOnlyCollection<Prerequisite> Prerequisites =>
-    _prerequisites.AsReadOnly();
+        _prerequisites.AsReadOnly();
 
     private Course(
         CourseId id,
@@ -68,14 +68,12 @@ public class Course : AggregateRoot<CourseId>
         ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
 
         Title = newTitle;
-
         RaiseDomainEvent(new CourseTitleChangedEvent(Id, Title));
     }
 
     public void ChangeSkillLevel(SkillLevel newSkillLevel)
     {
         SkillLevel = newSkillLevel;
-
         RaiseDomainEvent(new CourseSkillLevelChangedEvent(Id, SkillLevel));
     }
 
@@ -87,7 +85,6 @@ public class Course : AggregateRoot<CourseId>
             nameof(newStartDate));
 
         StartDate = newStartDate;
-
         RaiseDomainEvent(new CourseStartDateChangedEvent(Id, StartDate));
     }
 
@@ -97,14 +94,12 @@ public class Course : AggregateRoot<CourseId>
             newEndDate, StartDate, nameof(newEndDate));
 
         EndDate = newEndDate;
-
         RaiseDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));
     }
 
     public void ChangePrice(Price newPrice)
     {
         Price = newPrice;
-
         RaiseDomainEvent(new CoursePriceChangedEvent(Id, Price));
     }
 
@@ -112,7 +107,6 @@ public class Course : AggregateRoot<CourseId>
     {
         var prerequisite = Prerequisite.Create(Id, description);
         _prerequisites.Add(prerequisite);
-
         RaiseDomainEvent(new PrerequisiteAddedEvent(Id, prerequisite.Id));
 
         return prerequisite.Id;
@@ -125,7 +119,6 @@ public class Course : AggregateRoot<CourseId>
             ?? throw new PrerequisiteNotFoundException(prerequisiteId);
 
         _prerequisites.Remove(prerequisite);
-
         RaiseDomainEvent(new PrerequisiteRemovedEvent(Id, prerequisite.Id));
     }
 }
