@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Domain.Entities;
+﻿namespace CourseCatalog.Domain.Aggregates;
 
 public class Instructor : AggregateRoot<InstructorId>
 {
