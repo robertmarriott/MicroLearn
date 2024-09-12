@@ -1,4 +1,6 @@
-﻿namespace CourseCatalog.Domain.Common;
+﻿using MediatR;
+
+namespace SharedKernel.Domain;
 
 public interface IDomainEvent : INotification
 {

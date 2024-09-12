@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Domain.Common;
+﻿namespace SharedKernel.Domain;
 
 public class AggregateRoot<TId> : Entity<TId> where TId : notnull
 {

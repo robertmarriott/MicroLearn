@@ -1,4 +1,4 @@
-namespace CourseCatalog.Domain.Common;
+namespace SharedKernel.Domain;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
