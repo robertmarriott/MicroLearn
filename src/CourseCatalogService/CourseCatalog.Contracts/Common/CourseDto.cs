@@ -5,7 +5,7 @@ public record class CourseDto(
     Guid InstructorId,
     string Title,
     string SkillLevel,
-    DateOnly StartDate,
-    DateOnly EndDate,
+    DateTime StartDate,
+    DateTime EndDate,
     PriceDto Price,
     List<PrerequisiteDto> Prerequisites);
