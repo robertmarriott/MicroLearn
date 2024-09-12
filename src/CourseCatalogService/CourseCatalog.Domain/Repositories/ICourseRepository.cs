@@ -2,9 +2,9 @@
 
 public interface ICourseRepository
 {
-    Task<IEnumerable<Course>> GetAllAsync();
-    Task<IEnumerable<Course>> GetAllOpenForEnrollmentAsync();
-    Task<Course?> GetByIdAsync(CourseId id);
+    Task<List<Course>> GetAllAsync();
+    Task<List<Course>> GetAllOpenForEnrollmentAsync();
+    Task<Course?> GetByIdAsync(CourseId courseId);
     Task AddAsync(Course course);
     Task DeleteAsync(Course course);
 }
