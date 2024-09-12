@@ -1,6 +1,7 @@
 ﻿global using AutoMapper;
-global using CourseCatalog.Application.Dtos;
 global using CourseCatalog.Application.Exceptions;
+global using CourseCatalog.Contracts.Common;
+global using CourseCatalog.Contracts.Responses;
 global using CourseCatalog.Domain.Aggregates;
 global using CourseCatalog.Domain.Enums;
 global using CourseCatalog.Domain.Interfaces;
