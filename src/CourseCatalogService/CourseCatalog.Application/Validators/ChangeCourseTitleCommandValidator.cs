@@ -6,8 +6,9 @@ public class ChangeCourseTitleCommandValidator
     public ChangeCourseTitleCommandValidator()
     {
         RuleFor(x => x.NewTitle)
-            .NotEmpty().WithMessage("New title is required.")
-            .MaximumLength(100).WithMessage(
-                "New title cannot exceed 100 characters.");
+            .NotEmpty()
+            .WithMessage("New title is required.")
+            .MaximumLength(100)
+            .WithMessage("New title cannot exceed 100 characters.");
     }
 }
