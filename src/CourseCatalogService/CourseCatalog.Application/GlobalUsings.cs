@@ -1,4 +1,5 @@
 ﻿global using AutoMapper;
+global using CourseCatalog.Application.Behaviors;
 global using CourseCatalog.Application.Commands;
 global using CourseCatalog.Application.Exceptions;
 global using CourseCatalog.Contracts.Common;
