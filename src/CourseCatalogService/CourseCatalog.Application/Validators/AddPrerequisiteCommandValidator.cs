@@ -5,6 +5,10 @@ public class AddPrerequisiteCommandValidator
 {
     public AddPrerequisiteCommandValidator()
     {
+        RuleFor(x => x.CourseId.Value)
+            .NotEmpty()
+            .WithMessage("Course ID is required.");
+
         RuleFor(x => x.Description)
             .NotEmpty()
             .WithMessage("Description is required.")

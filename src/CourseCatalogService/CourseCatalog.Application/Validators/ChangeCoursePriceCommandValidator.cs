@@ -5,13 +5,13 @@ public class ChangeCoursePriceCommandValidator
 {
     public ChangeCoursePriceCommandValidator()
     {
+        RuleFor(x => x.CourseId.Value)
+            .NotEmpty()
+            .WithMessage("Course ID is required.");
+
         RuleFor(x => x.NewPrice)
             .ChildRules(price =>
             {
-                price.RuleFor(p => p.Amount)
-                    .GreaterThanOrEqualTo(0)
-                    .WithMessage("Amount must be non-negative.");
-
                 price.RuleFor(p => p.Currency)
                     .IsInEnum()
                     .WithMessage("Invalid currency.");

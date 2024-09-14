@@ -5,6 +5,10 @@ public class CreateCourseCommandValidator
 {
     public CreateCourseCommandValidator()
     {
+        RuleFor(x => x.InstructorId.Value)
+            .NotEmpty()
+            .WithMessage("Instructor ID is required.");
+
         RuleFor(x => x.Title)
             .NotEmpty()
             .WithMessage("Title is required.")
@@ -16,20 +20,16 @@ public class CreateCourseCommandValidator
             .WithMessage("Invalid skill level.");
 
         RuleFor(x => x.StartDate)
-            .GreaterThanOrEqualTo(DateOnly.FromDateTime(DateTime.UtcNow))
-            .WithMessage("Start date must be in the future.");
+            .NotEmpty()
+            .WithMessage("Start date is required.");
 
         RuleFor(x => x.EndDate)
-            .GreaterThan(x => x.StartDate)
-            .WithMessage("End date must be after the start date.");
+            .NotEmpty()
+            .WithMessage("End date is required.");
 
         RuleFor(x => x.Price)
             .ChildRules(price =>
             {
-                price.RuleFor(p => p.Amount)
-                    .GreaterThanOrEqualTo(0)
-                    .WithMessage("Amount must be non-negative.");
-
                 price.RuleFor(p => p.Currency)
                     .IsInEnum()
                     .WithMessage("Invalid currency.");
