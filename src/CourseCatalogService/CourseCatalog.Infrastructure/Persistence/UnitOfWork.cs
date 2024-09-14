@@ -1,25 +1,25 @@
 ﻿namespace CourseCatalog.Infrastructure.Persistence;
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork(CatalogDbContext context) : IUnitOfWork
 {
     public void BeginTransaction()
     {
-        throw new NotImplementedException();
+        context.Database.BeginTransaction();
     }
 
-    public Task CommitTransactionAsync()
+    public async Task CommitTransactionAsync()
     {
-        throw new NotImplementedException();
+        await context.Database.CommitTransactionAsync();
     }
 
-    public Task RollbackTransactionAsync()
+    public async Task RollbackTransactionAsync()
     {
-        throw new NotImplementedException();
+        await context.Database.RollbackTransactionAsync();
     }
 
-    public Task<int> SaveChangesAsync(
+    public async Task<int> SaveChangesAsync(
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        return await context.SaveChangesAsync(cancellationToken);
     }
 }
