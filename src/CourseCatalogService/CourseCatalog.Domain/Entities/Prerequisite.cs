@@ -17,6 +17,7 @@ public class Prerequisite : Entity<PrerequisiteId>
         ArgumentException.ThrowIfNullOrEmpty(
             description, nameof(description));
 
-        return new Prerequisite(new PrerequisiteId(), courseId, description);
+        return new Prerequisite(
+            PrerequisiteId.CreateUnique(), courseId, description);
     }
 }

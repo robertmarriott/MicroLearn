@@ -49,7 +49,7 @@ public class Course : AggregateRoot<CourseId>
             endDate, startDate, nameof(endDate));
 
         var course = new Course(
-            new CourseId(),
+            CourseId.CreateUnique(),
             instructorId,
             title,
             skillLevel,

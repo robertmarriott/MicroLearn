@@ -20,6 +20,7 @@ public class Instructor : AggregateRoot<InstructorId>
         ArgumentException.ThrowIfNullOrWhiteSpace(
             lastName, nameof(lastName));
 
-        return new Instructor(new InstructorId(), firstName, lastName);
+        return new Instructor(
+            InstructorId.CreateUnique(), firstName, lastName);
     }
 }
