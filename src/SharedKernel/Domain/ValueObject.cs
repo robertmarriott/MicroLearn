@@ -8,9 +8,8 @@ public abstract class ValueObject : IEquatable<ValueObject>
     {
         const int HashMultiplier = 31;
 
-        return GetEqualityComponents()
-            .Aggregate(0, (hash, value) =>
-                hash * HashMultiplier ^ (value?.GetHashCode() ?? 0));
+        return GetEqualityComponents().Aggregate(0, (hash, value) =>
+            hash * HashMultiplier ^ (value?.GetHashCode() ?? 0));
     }
 
     public bool Equals(ValueObject? other)
@@ -21,8 +20,8 @@ public abstract class ValueObject : IEquatable<ValueObject>
     public override bool Equals(object? obj)
     {
         return obj is ValueObject other
-            && GetEqualityComponents().SequenceEqual(
-                other.GetEqualityComponents());
+            && GetEqualityComponents()
+                .SequenceEqual(other.GetEqualityComponents());
     }
 
     public static bool operator ==(ValueObject left, ValueObject right)

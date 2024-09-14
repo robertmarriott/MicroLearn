@@ -1,10 +1,12 @@
 ﻿namespace CourseCatalog.Application.Commands;
 
 public record class ChangeCourseStartDateCommand(
-    CourseId CourseId, DateOnly NewStartDate) : IRequest<Unit>;
+    CourseId CourseId,
+    DateOnly NewStartDate) : IRequest<Unit>;
 
 public class ChangeCourseStartDateHandler(
-    ICourseRepository courseRepository, IUnitOfWork unitOfWork)
+    ICourseRepository courseRepository,
+    IUnitOfWork unitOfWork)
     : IRequestHandler<ChangeCourseStartDateCommand, Unit>
 {
     public async Task<Unit> Handle(

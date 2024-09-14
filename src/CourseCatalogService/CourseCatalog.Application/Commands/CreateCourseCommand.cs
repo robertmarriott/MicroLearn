@@ -9,11 +9,13 @@ public record class CreateCourseCommand(
     Price Price) : IRequest<CourseId>;
 
 public class CreateCourseHandler(
-    ICourseRepository courseRepository, IUnitOfWork unitOfWork)
+    ICourseRepository courseRepository,
+    IUnitOfWork unitOfWork)
     : IRequestHandler<CreateCourseCommand, CourseId>
 {
     public async Task<CourseId> Handle(
-        CreateCourseCommand request, CancellationToken cancellationToken)
+        CreateCourseCommand request,
+        CancellationToken cancellationToken)
     {
         var course = Course.Create(
             request.InstructorId,

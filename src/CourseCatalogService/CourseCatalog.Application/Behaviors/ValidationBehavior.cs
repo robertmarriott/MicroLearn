@@ -17,8 +17,8 @@ public class ValidationBehavior<TRequest, TResponse>(
 
         var context = new ValidationContext<TRequest>(request);
 
-        var results = await Task.WhenAll(
-            validators.Select(v => v.ValidateAsync(context)));
+        var results = await Task
+            .WhenAll(validators.Select(v => v.ValidateAsync(context)));
 
         var failures = results
             .Where(r => !r.IsValid)

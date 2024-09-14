@@ -40,13 +40,14 @@ public class Course : AggregateRoot<CourseId>
     {
         ArgumentException.ThrowIfNullOrEmpty(title, nameof(title));
 
-        ArgumentOutOfRangeException.ThrowIfLessThan(
-            startDate,
-            DateOnly.FromDateTime(DateTime.UtcNow),
-            nameof(startDate));
+        ArgumentOutOfRangeException
+            .ThrowIfLessThan(
+                startDate,
+                DateOnly.FromDateTime(DateTime.UtcNow),
+                nameof(startDate));
 
-        ArgumentOutOfRangeException.ThrowIfLessThan(
-            endDate, startDate, nameof(endDate));
+        ArgumentOutOfRangeException
+            .ThrowIfLessThan(endDate, startDate, nameof(endDate));
 
         var course = new Course(
             CourseId.CreateUnique(),
@@ -66,7 +67,6 @@ public class Course : AggregateRoot<CourseId>
     public void ChangeTitle(string newTitle)
     {
         ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
-
         Title = newTitle;
         AddDomainEvent(new CourseTitleChangedEvent(Id, Title));
     }
@@ -79,10 +79,11 @@ public class Course : AggregateRoot<CourseId>
 
     public void ChangeStartDate(DateOnly newStartDate)
     {
-        ArgumentOutOfRangeException.ThrowIfLessThan(
-            newStartDate,
-            DateOnly.FromDateTime(DateTime.UtcNow),
-            nameof(newStartDate));
+        ArgumentOutOfRangeException
+            .ThrowIfLessThan(
+                newStartDate,
+                DateOnly.FromDateTime(DateTime.UtcNow),
+                nameof(newStartDate));
 
         StartDate = newStartDate;
         AddDomainEvent(new CourseStartDateChangedEvent(Id, StartDate));
@@ -90,8 +91,8 @@ public class Course : AggregateRoot<CourseId>
 
     public void ChangeEndDate(DateOnly newEndDate)
     {
-        ArgumentOutOfRangeException.ThrowIfLessThan(
-            newEndDate, StartDate, nameof(newEndDate));
+        ArgumentOutOfRangeException
+            .ThrowIfLessThan(newEndDate, StartDate, nameof(newEndDate));
 
         EndDate = newEndDate;
         AddDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));

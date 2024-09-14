@@ -1,4 +1,5 @@
 ﻿namespace CourseCatalog.Domain.Events;
 
 public record class CourseStartDateChangedEvent(
-    CourseId CourseId, DateOnly NewStartDate) : IDomainEvent;
+    CourseId CourseId,
+    DateOnly NewStartDate) : IDomainEvent;

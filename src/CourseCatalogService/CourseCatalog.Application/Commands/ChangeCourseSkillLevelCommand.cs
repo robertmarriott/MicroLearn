@@ -1,10 +1,12 @@
 ﻿namespace CourseCatalog.Application.Commands;
 
 public record class ChangeCourseSkillLevelCommand(
-    CourseId CourseId, SkillLevel NewSkillLevel) : IRequest<Unit>;
+    CourseId CourseId,
+    SkillLevel NewSkillLevel) : IRequest<Unit>;
 
 public class ChangeCourseSkillLevelHandler(
-    ICourseRepository courseRepository, IUnitOfWork unitOfWork)
+    ICourseRepository courseRepository,
+    IUnitOfWork unitOfWork)
     : IRequestHandler<ChangeCourseSkillLevelCommand, Unit>
 {
     public async Task<Unit> Handle(

@@ -6,7 +6,9 @@ public class Prerequisite : Entity<PrerequisiteId>
     public string Description { get; }
 
     private Prerequisite(
-        PrerequisiteId id, CourseId courseId, string description) : base(id)
+        PrerequisiteId id,
+        CourseId courseId,
+        string description) : base(id)
     {
         CourseId = courseId;
         Description = description;
@@ -14,10 +16,11 @@ public class Prerequisite : Entity<PrerequisiteId>
 
     public static Prerequisite Create(CourseId courseId, string description)
     {
-        ArgumentException.ThrowIfNullOrEmpty(
-            description, nameof(description));
+        ArgumentException.ThrowIfNullOrEmpty(description, nameof(description));
 
         return new Prerequisite(
-            PrerequisiteId.CreateUnique(), courseId, description);
+            PrerequisiteId.CreateUnique(),
+            courseId,
+            description);
     }
 }

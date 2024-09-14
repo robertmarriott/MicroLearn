@@ -1,10 +1,12 @@
 ﻿namespace CourseCatalog.Application.Commands;
 
 public record class ChangeCourseEndDateCommand(
-    CourseId CourseId, DateOnly NewEndDate) : IRequest<Unit>;
+    CourseId CourseId,
+    DateOnly NewEndDate) : IRequest<Unit>;
 
 public class ChangeCourseEndDateHandler(
-    ICourseRepository courseRepository, IUnitOfWork unitOfWork)
+    ICourseRepository courseRepository,
+    IUnitOfWork unitOfWork)
     : IRequestHandler<ChangeCourseEndDateCommand, Unit>
 {
     public async Task<Unit> Handle(

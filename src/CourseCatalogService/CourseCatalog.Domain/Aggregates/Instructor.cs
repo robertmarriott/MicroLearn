@@ -14,13 +14,9 @@ public class Instructor : AggregateRoot<InstructorId>
 
     public static Instructor Create(string firstName, string lastName)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(
-            firstName, nameof(firstName));
+        ArgumentException.ThrowIfNullOrWhiteSpace(firstName, nameof(firstName));
+        ArgumentException.ThrowIfNullOrWhiteSpace(lastName, nameof(lastName));
 
-        ArgumentException.ThrowIfNullOrWhiteSpace(
-            lastName, nameof(lastName));
-
-        return new Instructor(
-            InstructorId.CreateUnique(), firstName, lastName);
+        return new Instructor(InstructorId.CreateUnique(), firstName, lastName);
     }
 }
