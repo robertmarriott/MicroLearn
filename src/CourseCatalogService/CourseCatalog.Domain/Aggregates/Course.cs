@@ -57,7 +57,7 @@ public class Course : AggregateRoot<CourseId>
             endDate,
             price);
 
-        course.RaiseDomainEvent(
+        course.AddDomainEvent(
             new CourseCreatedEvent(course.InstructorId, course.Id));
 
         return course;
@@ -68,13 +68,13 @@ public class Course : AggregateRoot<CourseId>
         ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
 
         Title = newTitle;
-        RaiseDomainEvent(new CourseTitleChangedEvent(Id, Title));
+        AddDomainEvent(new CourseTitleChangedEvent(Id, Title));
     }
 
     public void ChangeSkillLevel(SkillLevel newSkillLevel)
     {
         SkillLevel = newSkillLevel;
-        RaiseDomainEvent(new CourseSkillLevelChangedEvent(Id, SkillLevel));
+        AddDomainEvent(new CourseSkillLevelChangedEvent(Id, SkillLevel));
     }
 
     public void ChangeStartDate(DateOnly newStartDate)
@@ -85,7 +85,7 @@ public class Course : AggregateRoot<CourseId>
             nameof(newStartDate));
 
         StartDate = newStartDate;
-        RaiseDomainEvent(new CourseStartDateChangedEvent(Id, StartDate));
+        AddDomainEvent(new CourseStartDateChangedEvent(Id, StartDate));
     }
 
     public void ChangeEndDate(DateOnly newEndDate)
@@ -94,20 +94,20 @@ public class Course : AggregateRoot<CourseId>
             newEndDate, StartDate, nameof(newEndDate));
 
         EndDate = newEndDate;
-        RaiseDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));
+        AddDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));
     }
 
     public void ChangePrice(Price newPrice)
     {
         Price = newPrice;
-        RaiseDomainEvent(new CoursePriceChangedEvent(Id, Price));
+        AddDomainEvent(new CoursePriceChangedEvent(Id, Price));
     }
 
     public PrerequisiteId AddPrerequisite(string description)
     {
         var prerequisite = Prerequisite.Create(Id, description);
         _prerequisites.Add(prerequisite);
-        RaiseDomainEvent(new PrerequisiteAddedEvent(Id, prerequisite.Id));
+        AddDomainEvent(new PrerequisiteAddedEvent(Id, prerequisite.Id));
 
         return prerequisite.Id;
     }
@@ -119,6 +119,6 @@ public class Course : AggregateRoot<CourseId>
             ?? throw new PrerequisiteNotFoundException(prerequisiteId);
 
         _prerequisites.Remove(prerequisite);
-        RaiseDomainEvent(new PrerequisiteRemovedEvent(Id, prerequisite.Id));
+        AddDomainEvent(new PrerequisiteRemovedEvent(Id, prerequisite.Id));
     }
 }
