@@ -2,4 +2,4 @@
 
 public record class CourseEndDateChangedEvent(
     CourseId CourseId,
-    DateOnly NewEndDate) : IDomainEvent;
+    DateTime NewEndDate) : IDomainEvent;

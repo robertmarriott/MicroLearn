@@ -5,8 +5,8 @@ public class Course : AggregateRoot<CourseId>
     public InstructorId InstructorId { get; }
     public string Title { get; private set; }
     public SkillLevel SkillLevel { get; private set; }
-    public DateOnly StartDate { get; private set; }
-    public DateOnly EndDate { get; private set; }
+    public DateTime StartDate { get; private set; }
+    public DateTime EndDate { get; private set; }
     public Price Price { get; private set; }
 
     private readonly List<Prerequisite> _prerequisites = [];
@@ -18,8 +18,8 @@ public class Course : AggregateRoot<CourseId>
         InstructorId instructorId,
         string title,
         SkillLevel skillLevel,
-        DateOnly startDate,
-        DateOnly endDate,
+        DateTime startDate,
+        DateTime endDate,
         Price price) : base(id)
     {
         InstructorId = instructorId;
@@ -34,8 +34,8 @@ public class Course : AggregateRoot<CourseId>
         InstructorId instructorId,
         string title,
         SkillLevel skillLevel,
-        DateOnly startDate,
-        DateOnly endDate,
+        DateTime startDate,
+        DateTime endDate,
         Price price)
     {
         ArgumentException.ThrowIfNullOrEmpty(title, nameof(title));
@@ -43,7 +43,7 @@ public class Course : AggregateRoot<CourseId>
         ArgumentOutOfRangeException
             .ThrowIfLessThan(
                 startDate,
-                DateOnly.FromDateTime(DateTime.UtcNow),
+                DateTime.UtcNow,
                 nameof(startDate));
 
         ArgumentOutOfRangeException
@@ -77,19 +77,19 @@ public class Course : AggregateRoot<CourseId>
         AddDomainEvent(new CourseSkillLevelChangedEvent(Id, SkillLevel));
     }
 
-    public void ChangeStartDate(DateOnly newStartDate)
+    public void ChangeStartDate(DateTime newStartDate)
     {
         ArgumentOutOfRangeException
             .ThrowIfLessThan(
                 newStartDate,
-                DateOnly.FromDateTime(DateTime.UtcNow),
+                DateTime.UtcNow,
                 nameof(newStartDate));
 
         StartDate = newStartDate;
         AddDomainEvent(new CourseStartDateChangedEvent(Id, StartDate));
     }
 
-    public void ChangeEndDate(DateOnly newEndDate)
+    public void ChangeEndDate(DateTime newEndDate)
     {
         ArgumentOutOfRangeException
             .ThrowIfLessThan(newEndDate, StartDate, nameof(newEndDate));

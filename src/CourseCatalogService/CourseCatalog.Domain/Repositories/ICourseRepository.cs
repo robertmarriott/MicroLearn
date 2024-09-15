@@ -6,5 +6,4 @@ public interface ICourseRepository
     Task<List<Course>> GetAllOpenForEnrollmentAsync();
     Task<Course?> GetByIdAsync(CourseId courseId);
     Task AddAsync(Course course);
-    Task DeleteAsync(Course course);
 }
