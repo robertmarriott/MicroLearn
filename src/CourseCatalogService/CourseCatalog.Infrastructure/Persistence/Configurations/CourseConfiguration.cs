@@ -4,42 +4,34 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
 {
     public void Configure(EntityTypeBuilder<Course> builder)
     {
-        builder.HasKey(c => c.Id);
+        builder.HasKey(course => course.Id);
 
-        builder.Property(c => c.Id)
+        builder.Property(course => course.Id)
             .ValueGeneratedNever()
-            .HasConversion(
-                id => id.Value,
-                value => CourseId.Create(value));
+            .HasConversion(id => id.Value, value => CourseId.Create(value));
 
-        builder.Property(c => c.InstructorId)
-            .IsRequired();
+        builder.Property(course => course.InstructorId).IsRequired();
 
-        builder.Property(c => c.Title)
+        builder.Property(course => course.Title)
             .IsRequired()
             .HasMaxLength(100);
 
-        builder.Property(c => c.SkillLevel)
-            .IsRequired();
+        builder.Property(course => course.SkillLevel).IsRequired();
 
-        builder.Property(c => c.StartDate)
-            .IsRequired();
+        builder.Property(course => course.StartDate).IsRequired();
 
-        builder.Property(c => c.EndDate)
-            .IsRequired();
+        builder.Property(course => course.EndDate).IsRequired();
 
-        builder.OwnsOne(c => c.Price, priceBuilder =>
+        builder.OwnsOne(course => course.Price, priceBuilder =>
         {
-            priceBuilder.Property(p => p.Amount)
-                .IsRequired();
+            priceBuilder.Property(price => price.Amount).IsRequired();
 
-            priceBuilder.Property(p => p.Currency)
-                .IsRequired();
+            priceBuilder.Property(price => price.Currency).IsRequired();
         });
 
-        builder.HasMany(c => c.Prerequisites)
+        builder.HasMany(course => course.Prerequisites)
             .WithOne()
-            .HasForeignKey(p => p.CourseId)
+            .HasForeignKey(prerequisite => prerequisite.CourseId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

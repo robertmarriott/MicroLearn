@@ -4,18 +4,17 @@ public class PrerequisiteConfiguration : IEntityTypeConfiguration<Prerequisite>
 {
     public void Configure(EntityTypeBuilder<Prerequisite> builder)
     {
-        builder.HasKey(p => p.Id);
+        builder.HasKey(prerequisite => prerequisite.Id);
 
-        builder.Property(p => p.Id)
+        builder.Property(prerequisite => prerequisite.Id)
             .ValueGeneratedNever()
             .HasConversion(
                 id => id.Value,
                 value => PrerequisiteId.Create(value));
 
-        builder.Property(p => p.CourseId)
-            .IsRequired();
+        builder.Property(prerequisite => prerequisite.CourseId).IsRequired();
 
-        builder.Property(p => p.Description)
+        builder.Property(prerequisite => prerequisite.Description)
             .IsRequired()
             .HasMaxLength(500);
     }

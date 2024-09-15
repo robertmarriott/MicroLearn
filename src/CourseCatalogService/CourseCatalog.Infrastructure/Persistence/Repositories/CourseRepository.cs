@@ -12,13 +12,14 @@ public class CourseRepository(CatalogDbContext context) : ICourseRepository
         var currentDate = DateTime.Now;
 
         return await context.Courses
-            .Where(c => c.StartDate >= currentDate)
+            .Where(course => course.StartDate >= currentDate)
             .ToListAsync();
     }
 
     public async Task<Course?> GetByIdAsync(CourseId courseId)
     {
-        return await context.Courses.FirstOrDefaultAsync(c => c.Id == courseId);
+        return await context.Courses
+            .FirstOrDefaultAsync(course => course.Id == courseId);
     }
 
     public async Task AddAsync(Course course)

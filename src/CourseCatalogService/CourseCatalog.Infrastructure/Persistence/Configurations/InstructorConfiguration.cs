@@ -4,19 +4,17 @@ public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
 {
     public void Configure(EntityTypeBuilder<Instructor> builder)
     {
-        builder.HasKey(i => i.Id);
+        builder.HasKey(instructor => instructor.Id);
 
-        builder.Property(i => i.Id)
+        builder.Property(instructor => instructor.Id)
             .ValueGeneratedNever()
-            .HasConversion(
-                id => id.Value,
-                value => InstructorId.Create(value));
+            .HasConversion(id => id.Value, value => InstructorId.Create(value));
 
-        builder.Property(i => i.FirstName)
+        builder.Property(instructor => instructor.FirstName)
             .IsRequired()
             .HasMaxLength(50);
 
-        builder.Property(i => i.LastName)
+        builder.Property(instructor => instructor.LastName)
             .IsRequired()
             .HasMaxLength(50);
     }
