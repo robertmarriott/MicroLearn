@@ -8,11 +8,12 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplication(
         this IServiceCollection services)
     {
-        services.AddMediatR(cfg =>
+        services.AddMediatR(configuration =>
         {
-            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            configuration.RegisterServicesFromAssembly(
+                Assembly.GetExecutingAssembly());
 
-            cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
