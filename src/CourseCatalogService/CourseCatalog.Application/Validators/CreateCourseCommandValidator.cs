@@ -5,32 +5,32 @@ public class CreateCourseCommandValidator
 {
     public CreateCourseCommandValidator()
     {
-        RuleFor(x => x.InstructorId.Value)
+        RuleFor(command => command.InstructorId.Value)
             .NotEmpty()
             .WithMessage("Instructor ID is required.");
 
-        RuleFor(x => x.Title)
+        RuleFor(command => command.Title)
             .NotEmpty()
             .WithMessage("Title is required.")
             .MaximumLength(100)
             .WithMessage("Title cannot exceed 100 characters.");
 
-        RuleFor(x => x.SkillLevel)
+        RuleFor(command => command.SkillLevel)
             .IsInEnum()
             .WithMessage("Invalid skill level.");
 
-        RuleFor(x => x.StartDate)
+        RuleFor(command => command.StartDate)
             .NotEmpty()
             .WithMessage("Start date is required.");
 
-        RuleFor(x => x.EndDate)
+        RuleFor(command => command.EndDate)
             .NotEmpty()
             .WithMessage("End date is required.");
 
-        RuleFor(x => x.Price)
-            .ChildRules(price =>
+        RuleFor(command => command.Price)
+            .ChildRules(priceValidator =>
             {
-                price.RuleFor(p => p.Currency)
+                priceValidator.RuleFor(price => price.Currency)
                     .IsInEnum()
                     .WithMessage("Invalid currency.");
             });

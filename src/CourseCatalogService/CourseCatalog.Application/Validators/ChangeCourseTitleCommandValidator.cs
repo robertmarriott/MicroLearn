@@ -5,11 +5,11 @@ public class ChangeCourseTitleCommandValidator
 {
     public ChangeCourseTitleCommandValidator()
     {
-        RuleFor(x => x.CourseId.Value)
+        RuleFor(command => command.CourseId.Value)
             .NotEmpty()
             .WithMessage("Course ID is required.");
 
-        RuleFor(x => x.NewTitle)
+        RuleFor(command => command.NewTitle)
             .NotEmpty()
             .WithMessage("New title is required.")
             .MaximumLength(100)

@@ -5,11 +5,11 @@ public class ChangeCourseStartDateCommandValidator
 {
     public ChangeCourseStartDateCommandValidator()
     {
-        RuleFor(x => x.CourseId.Value)
+        RuleFor(command => command.CourseId.Value)
             .NotEmpty()
             .WithMessage("Course ID is required.");
 
-        RuleFor(x => x.NewStartDate)
+        RuleFor(command => command.NewStartDate)
             .NotEmpty()
             .WithMessage("New start date is required.");
     }

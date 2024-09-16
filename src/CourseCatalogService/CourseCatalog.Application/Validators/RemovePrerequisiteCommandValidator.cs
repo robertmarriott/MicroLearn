@@ -5,11 +5,11 @@ public class RemovePrerequisiteCommandValidator
 {
     public RemovePrerequisiteCommandValidator()
     {
-        RuleFor(x => x.CourseId.Value)
+        RuleFor(command => command.CourseId.Value)
             .NotEmpty()
             .WithMessage("Course ID is required.");
 
-        RuleFor(x => x.PrerequisiteId.Value)
+        RuleFor(command => command.PrerequisiteId.Value)
             .NotEmpty()
             .WithMessage("Prerequisite ID is required.");
     }

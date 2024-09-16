@@ -5,11 +5,11 @@ public class ChangeCourseSkillLevelCommandValidator
 {
     public ChangeCourseSkillLevelCommandValidator()
     {
-        RuleFor(x => x.CourseId.Value)
+        RuleFor(command => command.CourseId.Value)
             .NotEmpty()
             .WithMessage("Course ID is required.");
 
-        RuleFor(x => x.NewSkillLevel)
+        RuleFor(command => command.NewSkillLevel)
             .IsInEnum()
             .WithMessage("Invalid skill level.");
     }
