@@ -21,9 +21,9 @@ public class ValidationBehavior<TRequest, TResponse>(
             .WhenAll(validators.Select(v => v.ValidateAsync(context)));
 
         var failures = results
-            .Where(r => !r.IsValid)
-            .SelectMany(r => r.Errors)
-            .Where(f => f is not null)
+            .Where(result => !result.IsValid)
+            .SelectMany(result => result.Errors)
+            .Where(failure => failure is not null)
             .ToList();
 
         if (failures.Count > 0)
