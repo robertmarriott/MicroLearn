@@ -4,7 +4,10 @@ public class CourseRepository(CatalogDbContext context) : ICourseRepository
 {
     public async Task<List<Course>> GetAllAsync()
     {
-        return await context.Courses.ToListAsync();
+        return await context.Courses
+            .Include(course => course.Prerequisites)
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<List<Course>> GetAllOpenForEnrollmentAsync()
@@ -13,12 +16,15 @@ public class CourseRepository(CatalogDbContext context) : ICourseRepository
 
         return await context.Courses
             .Where(course => course.StartDate >= currentDate)
+            .Include(course => course.Prerequisites)
+            .AsNoTracking()
             .ToListAsync();
     }
 
     public async Task<Course?> GetByIdAsync(CourseId courseId)
     {
         return await context.Courses
+            .Include(course => course.Prerequisites)
             .FirstOrDefaultAsync(course => course.Id == courseId);
     }
 
