@@ -9,12 +9,6 @@ public class ChangeCoursePriceCommandValidator
             .NotEmpty()
             .WithMessage("Course ID is required.");
 
-        RuleFor(command => command.NewPrice)
-            .ChildRules(priceValidator =>
-            {
-                priceValidator.RuleFor(price => price.Currency)
-                    .IsInEnum()
-                    .WithMessage("Invalid currency.");
-            });
+        RuleFor(command => command.NewPrice).SetValidator(new PriceValidator());
     }
 }

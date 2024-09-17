@@ -27,12 +27,6 @@ public class CreateCourseCommandValidator
             .NotEmpty()
             .WithMessage("End date is required.");
 
-        RuleFor(command => command.Price)
-            .ChildRules(priceValidator =>
-            {
-                priceValidator.RuleFor(price => price.Currency)
-                    .IsInEnum()
-                    .WithMessage("Invalid currency.");
-            });
+        RuleFor(command => command.Price).SetValidator(new PriceValidator());
     }
 }
