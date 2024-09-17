@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Contracts.Common;
+﻿namespace CourseCatalog.Contracts.Dtos;
 
 public record class CourseDto(
     Guid Id,

@@ -1,1 +1,1 @@
-﻿global using CourseCatalog.Contracts.Common;
+﻿global using CourseCatalog.Contracts.Dtos;

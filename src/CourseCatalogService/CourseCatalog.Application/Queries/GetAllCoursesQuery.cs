@@ -1,5 +1,4 @@
-﻿
-namespace CourseCatalog.Application.Queries;
+﻿namespace CourseCatalog.Application.Queries;
 
 public record class GetAllCoursesQuery() : IRequest<GetAllCoursesResponse>;
 
