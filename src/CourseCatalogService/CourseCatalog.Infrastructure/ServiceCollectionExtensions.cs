@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
                 configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<ICourseRepository, CourseRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }
