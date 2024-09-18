@@ -4,6 +4,10 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>> where TId : notnull
 {
     public TId Id { get; protected init; }
 
+    private readonly List<IDomainEvent> _domainEvents = [];
+    public IReadOnlyCollection<IDomainEvent> DomainEvents =>
+        _domainEvents.AsReadOnly();
+
 #pragma warning disable CS8618
     protected Entity() { }
 #pragma warning restore CS8618
@@ -11,6 +15,16 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>> where TId : notnull
     protected Entity(TId id) : this()
     {
         Id = id;
+    }
+
+    protected void AddDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
+
+    public void ClearDomainEvents()
+    {
+        _domainEvents.Clear();
     }
 
     public override int GetHashCode()

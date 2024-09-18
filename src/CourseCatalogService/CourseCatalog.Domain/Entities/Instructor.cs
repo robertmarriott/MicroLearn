@@ -1,6 +1,6 @@
-﻿namespace CourseCatalog.Domain.Aggregates;
+﻿namespace CourseCatalog.Domain.Entities;
 
-public class Instructor : AggregateRoot<InstructorId>
+public class Instructor : Entity<InstructorId>
 {
     public string FirstName { get; }
     public string LastName { get; }

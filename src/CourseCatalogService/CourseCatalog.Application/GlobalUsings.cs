@@ -4,7 +4,7 @@ global using CourseCatalog.Application.Commands;
 global using CourseCatalog.Application.Exceptions;
 global using CourseCatalog.Contracts.Dtos;
 global using CourseCatalog.Contracts.Responses;
-global using CourseCatalog.Domain.Aggregates;
+global using CourseCatalog.Domain.Entities;
 global using CourseCatalog.Domain.Enums;
 global using CourseCatalog.Domain.Interfaces;
 global using CourseCatalog.Domain.Repositories;
