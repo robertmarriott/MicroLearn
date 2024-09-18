@@ -6,17 +6,30 @@ public class CourseRepository(CatalogDbContext context) : ICourseRepository
     {
         return await context.Courses
             .Include(course => course.Prerequisites)
+            .OrderByDescending(course => course.StartDate)
             .AsNoTracking()
             .ToListAsync();
     }
 
-    public async Task<List<Course>> GetAllOpenForEnrollmentAsync()
+    public async Task<List<Course>> GetOpenForEnrollmentAsync()
     {
         var currentDate = DateTime.Now;
 
         return await context.Courses
-            .Where(course => course.StartDate >= currentDate)
+            .Where(course => course.IsOpenForEnrollment)
             .Include(course => course.Prerequisites)
+            .OrderByDescending(course => course.StartDate)
+            .AsNoTracking()
+            .ToListAsync();
+    }
+
+    public async Task<List<Course>> GetByInstructorIdAsync(
+        InstructorId instructorId)
+    {
+        return await context.Courses
+            .Where(course => course.InstructorId == instructorId)
+            .Include(course => course.Prerequisites)
+            .OrderByDescending(course => course.StartDate)
             .AsNoTracking()
             .ToListAsync();
     }
@@ -24,8 +37,9 @@ public class CourseRepository(CatalogDbContext context) : ICourseRepository
     public async Task<Course?> GetByIdAsync(CourseId courseId)
     {
         return await context.Courses
+            .Where(course => course.Id == courseId)
             .Include(course => course.Prerequisites)
-            .FirstOrDefaultAsync(course => course.Id == courseId);
+            .FirstOrDefaultAsync();
     }
 
     public async Task AddAsync(Course course)

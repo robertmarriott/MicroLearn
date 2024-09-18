@@ -18,16 +18,16 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
 
         builder.Property(course => course.SkillLevel).IsRequired();
 
-        builder.Property(course => course.StartDate).IsRequired();
-
-        builder.Property(course => course.EndDate).IsRequired();
-
         builder.OwnsOne(course => course.Price, priceBuilder =>
         {
             priceBuilder.Property(price => price.Amount).IsRequired();
 
             priceBuilder.Property(price => price.Currency).IsRequired();
         });
+
+        builder.Property(course => course.StartDate).IsRequired();
+
+        builder.Property(course => course.EndDate).IsRequired();
 
         builder.HasMany(course => course.Prerequisites)
             .WithOne()

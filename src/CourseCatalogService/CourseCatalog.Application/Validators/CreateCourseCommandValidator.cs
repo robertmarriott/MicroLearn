@@ -19,6 +19,8 @@ public class CreateCourseCommandValidator
             .IsInEnum()
             .WithMessage("Invalid skill level.");
 
+        RuleFor(command => command.Price).SetValidator(new PriceValidator());
+
         RuleFor(command => command.StartDate)
             .NotEmpty()
             .WithMessage("Start date is required.");
@@ -26,7 +28,5 @@ public class CreateCourseCommandValidator
         RuleFor(command => command.EndDate)
             .NotEmpty()
             .WithMessage("End date is required.");
-
-        RuleFor(command => command.Price).SetValidator(new PriceValidator());
     }
 }

@@ -4,9 +4,9 @@ public record class CreateCourseCommand(
     InstructorId InstructorId,
     string Title,
     SkillLevel SkillLevel,
-    DateOnly StartDate,
-    DateOnly EndDate,
-    Price Price) : IRequest<CourseId>;
+    Price Price,
+    DateTime StartDate,
+    DateTime EndDate) : IRequest<CourseId>;
 
 public class CreateCourseHandler(
     ICourseRepository courseRepository,
@@ -15,15 +15,15 @@ public class CreateCourseHandler(
 {
     public async Task<CourseId> Handle(
         CreateCourseCommand request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         var course = Course.Create(
             request.InstructorId,
             request.Title,
             request.SkillLevel,
+            request.Price,
             request.StartDate,
-            request.EndDate,
-            request.Price);
+            request.EndDate);
 
         await courseRepository.AddAsync(course);
         await unitOfWork.SaveChangesAsync(cancellationToken);

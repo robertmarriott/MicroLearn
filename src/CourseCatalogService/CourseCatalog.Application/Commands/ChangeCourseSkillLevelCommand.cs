@@ -11,7 +11,7 @@ public class ChangeCourseSkillLevelHandler(
 {
     public async Task<Unit> Handle(
         ChangeCourseSkillLevelCommand request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)
             ?? throw new CourseNotFoundException(request.CourseId);

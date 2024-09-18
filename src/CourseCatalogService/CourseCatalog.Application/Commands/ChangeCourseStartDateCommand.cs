@@ -2,7 +2,7 @@
 
 public record class ChangeCourseStartDateCommand(
     CourseId CourseId,
-    DateOnly NewStartDate) : IRequest<Unit>;
+    DateTime NewStartDate) : IRequest<Unit>;
 
 public class ChangeCourseStartDateHandler(
     ICourseRepository courseRepository,
@@ -11,7 +11,7 @@ public class ChangeCourseStartDateHandler(
 {
     public async Task<Unit> Handle(
         ChangeCourseStartDateCommand request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)
             ?? throw new CourseNotFoundException(request.CourseId);

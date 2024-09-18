@@ -8,7 +8,7 @@ public class ValidationBehavior<TRequest, TResponse>(
     public async Task<TResponse> Handle(
         TRequest request,
         RequestHandlerDelegate<TResponse> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         if (!validators.Any())
         {

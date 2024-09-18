@@ -5,9 +5,12 @@ public class Course : Entity<CourseId>
     public InstructorId InstructorId { get; }
     public string Title { get; private set; }
     public SkillLevel SkillLevel { get; private set; }
+    public Price Price { get; private set; }
     public DateTime StartDate { get; private set; }
     public DateTime EndDate { get; private set; }
-    public Price Price { get; private set; }
+    public DateTime? CancellationDate { get; private set; } = null;
+    public bool IsCancelled => CancellationDate is not null;
+    public bool IsOpenForEnrollment => !IsCancelled && StartDate > DateTime.UtcNow;
 
     private readonly List<Prerequisite> _prerequisites = [];
     public IReadOnlyCollection<Prerequisite> Prerequisites =>
@@ -18,25 +21,25 @@ public class Course : Entity<CourseId>
         InstructorId instructorId,
         string title,
         SkillLevel skillLevel,
+        Price price,
         DateTime startDate,
-        DateTime endDate,
-        Price price) : base(id)
+        DateTime endDate) : base(id)
     {
         InstructorId = instructorId;
         Title = title;
         SkillLevel = skillLevel;
+        Price = price;
         StartDate = startDate;
         EndDate = endDate;
-        Price = price;
     }
 
     public static Course Create(
         InstructorId instructorId,
         string title,
         SkillLevel skillLevel,
+        Price price,
         DateTime startDate,
-        DateTime endDate,
-        Price price)
+        DateTime endDate)
     {
         ArgumentException.ThrowIfNullOrEmpty(title, nameof(title));
 
@@ -54,9 +57,9 @@ public class Course : Entity<CourseId>
             instructorId,
             title,
             skillLevel,
+            price,
             startDate,
-            endDate,
-            price);
+            endDate);
 
         course.AddDomainEvent(
             new CourseCreatedEvent(course.InstructorId, course.Id));
@@ -67,6 +70,7 @@ public class Course : Entity<CourseId>
     public void ChangeTitle(string newTitle)
     {
         ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
+
         Title = newTitle;
         AddDomainEvent(new CourseTitleChangedEvent(Id, Title));
     }
@@ -75,6 +79,12 @@ public class Course : Entity<CourseId>
     {
         SkillLevel = newSkillLevel;
         AddDomainEvent(new CourseSkillLevelChangedEvent(Id, SkillLevel));
+    }
+
+    public void ChangePrice(Price newPrice)
+    {
+        Price = newPrice;
+        AddDomainEvent(new CoursePriceChangedEvent(Id, Price));
     }
 
     public void ChangeStartDate(DateTime newStartDate)
@@ -98,10 +108,22 @@ public class Course : Entity<CourseId>
         AddDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));
     }
 
-    public void ChangePrice(Price newPrice)
+    public void Cancel()
     {
-        Price = newPrice;
-        AddDomainEvent(new CoursePriceChangedEvent(Id, Price));
+        if (IsCancelled)
+        {
+            throw new InvalidOperationException(
+                "The course is already cancelled.");
+        }
+
+        if (StartDate <= DateTime.UtcNow)
+        {
+            throw new InvalidOperationException(
+                "Cannot cancel a course that has already started.");
+        }
+
+        CancellationDate = DateTime.UtcNow;
+        AddDomainEvent(new CourseCancelledEvent(Id, CancellationDate.Value));
     }
 
     public PrerequisiteId AddPrerequisite(string description)

@@ -4,6 +4,6 @@ public record class CreateCourseRequest(
     Guid InstructorId,
     string Title,
     string SkillLevel,
-    DateOnly StartDate,
-    DateOnly EndDate,
-    PriceDto Price);
+    PriceDto Price,
+    DateTime StartDate,
+    DateTime EndDate);

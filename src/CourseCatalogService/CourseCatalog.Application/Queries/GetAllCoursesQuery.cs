@@ -8,7 +8,7 @@ public class GetAllCoursesHandler(
 {
     public async Task<GetAllCoursesResponse> Handle(
         GetAllCoursesQuery request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         var courses = await courseRepository.GetAllAsync();
 
