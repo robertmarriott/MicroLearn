@@ -1,5 +1,4 @@
-﻿global using CourseCatalog.Domain.Aggregates;
-global using CourseCatalog.Domain.Entities;
+﻿global using CourseCatalog.Domain.Entities;
 global using CourseCatalog.Domain.Interfaces;
 global using CourseCatalog.Domain.Repositories;
 global using CourseCatalog.Domain.ValueObjects;
