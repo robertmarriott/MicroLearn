@@ -6,8 +6,7 @@ public record class ChangeCourseEndDateCommand(
 
 public class ChangeCourseEndDateHandler(
     ICourseRepository courseRepository,
-    IUnitOfWork unitOfWork)
-    : IRequestHandler<ChangeCourseEndDateCommand, Unit>
+    IUnitOfWork unitOfWork) : IRequestHandler<ChangeCourseEndDateCommand, Unit>
 {
     public async Task<Unit> Handle(
         ChangeCourseEndDateCommand request,

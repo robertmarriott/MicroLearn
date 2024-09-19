@@ -2,23 +2,23 @@
 
 public record class AddPrerequisiteCommand(
     CourseId CourseId,
-    string Description) : IRequest<PrerequisiteId>;
+    string Description) : IRequest<Prerequisite>;
 
 public class AddPrerequisiteHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork)
-    : IRequestHandler<AddPrerequisiteCommand, PrerequisiteId>
+    : IRequestHandler<AddPrerequisiteCommand, Prerequisite>
 {
-    public async Task<PrerequisiteId> Handle(
+    public async Task<Prerequisite> Handle(
         AddPrerequisiteCommand request,
         CancellationToken cancellationToken)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)
             ?? throw new CourseNotFoundException(request.CourseId);
 
-        var prerequisiteId = course.AddPrerequisite(request.Description);
+        var prerequisite = course.AddPrerequisite(request.Description);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return prerequisiteId;
+        return prerequisite;
     }
 }

@@ -127,13 +127,13 @@ public class Course : Entity<CourseId>
         AddDomainEvent(new CourseCancelledEvent(Id, CancellationDate.Value));
     }
 
-    public PrerequisiteId AddPrerequisite(string description)
+    public Prerequisite AddPrerequisite(string description)
     {
         var prerequisite = Prerequisite.Create(Id, description);
         _prerequisites.Add(prerequisite);
         AddDomainEvent(new PrerequisiteAddedEvent(Id, prerequisite.Id));
 
-        return prerequisite.Id;
+        return prerequisite;
     }
 
     public void RemovePrerequisite(PrerequisiteId prerequisiteId)

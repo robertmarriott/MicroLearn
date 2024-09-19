@@ -6,8 +6,7 @@ public record class RemovePrerequisiteCommand(
 
 public class RemovePrerequisiteHandler(
     ICourseRepository courseRepository,
-    IUnitOfWork unitOfWork)
-    : IRequestHandler<RemovePrerequisiteCommand, Unit>
+    IUnitOfWork unitOfWork) : IRequestHandler<RemovePrerequisiteCommand, Unit>
 {
     public async Task<Unit> Handle(
         RemovePrerequisiteCommand request,

@@ -6,14 +6,13 @@ public record class CreateCourseCommand(
     SkillLevel SkillLevel,
     Price Price,
     DateTime StartDate,
-    DateTime EndDate) : IRequest<CourseId>;
+    DateTime EndDate) : IRequest<Course>;
 
 public class CreateCourseHandler(
     ICourseRepository courseRepository,
-    IUnitOfWork unitOfWork)
-    : IRequestHandler<CreateCourseCommand, CourseId>
+    IUnitOfWork unitOfWork) : IRequestHandler<CreateCourseCommand, Course>
 {
-    public async Task<CourseId> Handle(
+    public async Task<Course> Handle(
         CreateCourseCommand request,
         CancellationToken cancellationToken)
     {
@@ -28,6 +27,6 @@ public class CreateCourseHandler(
         await courseRepository.AddAsync(course);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return course.Id;
+        return course;
     }
 }

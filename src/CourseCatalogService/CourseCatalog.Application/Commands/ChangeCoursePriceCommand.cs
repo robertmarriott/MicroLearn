@@ -6,8 +6,7 @@ public record class ChangeCoursePriceCommand(
 
 public class ChangeCoursePriceHandler(
     ICourseRepository courseRepository,
-    IUnitOfWork unitOfWork)
-    : IRequestHandler<ChangeCoursePriceCommand, Unit>
+    IUnitOfWork unitOfWork) : IRequestHandler<ChangeCoursePriceCommand, Unit>
 {
     public async Task<Unit> Handle(
         ChangeCoursePriceCommand request,
