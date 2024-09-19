@@ -29,6 +29,10 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
 
         builder.Property(course => course.EndDate).IsRequired();
 
+        builder.Ignore(course => course.IsCancelled);
+
+        builder.Ignore(course => course.IsOpenForEnrollment);
+
         builder.HasMany(course => course.Prerequisites)
             .WithOne()
             .HasForeignKey(prerequisite => prerequisite.CourseId)
