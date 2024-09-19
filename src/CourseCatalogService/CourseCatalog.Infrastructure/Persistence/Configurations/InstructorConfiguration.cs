@@ -10,12 +10,8 @@ public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
             .ValueGeneratedNever()
             .HasConversion(id => id.Value, value => InstructorId.Create(value));
 
-        builder.Property(instructor => instructor.FirstName)
+        builder.Property(instructor => instructor.Name)
             .IsRequired()
-            .HasMaxLength(50);
-
-        builder.Property(instructor => instructor.LastName)
-            .IsRequired()
-            .HasMaxLength(50);
+            .HasMaxLength(100);
     }
 }

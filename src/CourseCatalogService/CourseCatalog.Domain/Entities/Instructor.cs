@@ -2,21 +2,17 @@
 
 public class Instructor : Entity<InstructorId>
 {
-    public string FirstName { get; }
-    public string LastName { get; }
+    public string Name { get; }
 
-    private Instructor(InstructorId id, string firstName, string lastName)
-        : base(id)
+    private Instructor(InstructorId id, string name) : base(id)
     {
-        FirstName = firstName;
-        LastName = lastName;
+        Name = name;
     }
 
-    public static Instructor Create(string firstName, string lastName)
+    public static Instructor Create(string name)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(firstName, nameof(firstName));
-        ArgumentException.ThrowIfNullOrWhiteSpace(lastName, nameof(lastName));
+        ArgumentException.ThrowIfNullOrWhiteSpace(name, nameof(name));
 
-        return new Instructor(InstructorId.CreateUnique(), firstName, lastName);
+        return new Instructor(InstructorId.CreateUnique(), name);
     }
 }

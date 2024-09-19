@@ -6,6 +6,7 @@ public record class GetCoursesByInstructorIdQuery(InstructorId InstructorId)
 
 public class GetCoursesByInstructorIdHandler(
     ICourseRepository courseRepository,
+    IInstructorRepository instructorRepository,
     IMapper mapper)
     : IRequestHandler<GetCoursesByInstructorIdQuery, IReadOnlyList<CourseResponse>>
 {
@@ -13,6 +14,14 @@ public class GetCoursesByInstructorIdHandler(
         GetCoursesByInstructorIdQuery request,
         CancellationToken cancellationToken)
     {
+        var instructorExists = await instructorRepository
+            .ExistsAsync(request.InstructorId);
+
+        if (!instructorExists)
+        {
+            throw new InstructorNotFoundException(request.InstructorId);
+        }
+
         var courses = await courseRepository
             .GetByInstructorIdAsync(request.InstructorId);
 
