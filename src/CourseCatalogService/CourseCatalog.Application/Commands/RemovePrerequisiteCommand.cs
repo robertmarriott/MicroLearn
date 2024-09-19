@@ -11,7 +11,7 @@ public class RemovePrerequisiteHandler(
 {
     public async Task<Unit> Handle(
         RemovePrerequisiteCommand request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)
             ?? throw new CourseNotFoundException(request.CourseId);

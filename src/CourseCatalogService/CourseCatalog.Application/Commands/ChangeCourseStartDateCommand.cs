@@ -11,7 +11,7 @@ public class ChangeCourseStartDateHandler(
 {
     public async Task<Unit> Handle(
         ChangeCourseStartDateCommand request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)
             ?? throw new CourseNotFoundException(request.CourseId);

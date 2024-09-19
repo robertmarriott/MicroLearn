@@ -10,7 +10,7 @@ public class GetCoursesOpenForEnrollmentHandler(
 {
     public async Task<GetCoursesOpenForEnrollmentResponse> Handle(
         GetCoursesOpenForEnrollmentQuery request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var courses = await courseRepository.GetOpenForEnrollmentAsync();
 

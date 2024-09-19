@@ -11,7 +11,7 @@ public class AddPrerequisiteHandler(
 {
     public async Task<PrerequisiteId> Handle(
         AddPrerequisiteCommand request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)
             ?? throw new CourseNotFoundException(request.CourseId);

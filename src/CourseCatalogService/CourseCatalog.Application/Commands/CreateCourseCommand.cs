@@ -15,7 +15,7 @@ public class CreateCourseHandler(
 {
     public async Task<CourseId> Handle(
         CreateCourseCommand request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var course = Course.Create(
             request.InstructorId,

@@ -9,7 +9,7 @@ public class GetCourseByIdHandler(
 {
     public async Task<GetCourseByIdResponse> Handle(
         GetCourseByIdQuery request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)
             ?? throw new CourseNotFoundException(request.CourseId);
