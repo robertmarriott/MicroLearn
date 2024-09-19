@@ -9,4 +9,6 @@ public record class CourseResponse(
     DateTime StartDate,
     DateTime EndDate,
     DateTime? CancellationDate,
+    bool IsCancelled,
+    bool IsOpenForEnrollment,
     IReadOnlyList<PrerequisiteResponse> Prerequisites);
