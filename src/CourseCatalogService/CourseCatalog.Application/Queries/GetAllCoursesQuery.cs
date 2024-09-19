@@ -1,18 +1,19 @@
 ﻿namespace CourseCatalog.Application.Queries;
 
-public record class GetAllCoursesQuery() : IRequest<GetAllCoursesResponse>;
+public record class GetAllCoursesQuery()
+    : IRequest<IReadOnlyList<CourseResponse>>;
 
 public class GetAllCoursesHandler(
     ICourseRepository courseRepository,
-    IMapper mapper) : IRequestHandler<GetAllCoursesQuery, GetAllCoursesResponse>
+    IMapper mapper)
+    : IRequestHandler<GetAllCoursesQuery, IReadOnlyList<CourseResponse>>
 {
-    public async Task<GetAllCoursesResponse> Handle(
+    public async Task<IReadOnlyList<CourseResponse>> Handle(
         GetAllCoursesQuery request,
         CancellationToken cancellationToken)
     {
         var courses = await courseRepository.GetAllAsync();
 
-        return new GetAllCoursesResponse(
-            mapper.Map<IReadOnlyList<CourseResponse>>(courses));
+        return mapper.Map<IReadOnlyList<CourseResponse>>(courses);
     }
 }

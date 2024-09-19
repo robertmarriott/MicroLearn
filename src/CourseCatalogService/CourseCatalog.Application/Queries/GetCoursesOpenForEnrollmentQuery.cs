@@ -1,20 +1,19 @@
 ﻿namespace CourseCatalog.Application.Queries;
 
-public record class GetCoursesOpenForEnrollment()
-    : IRequest<GetCoursesOpenForEnrollmentResponse>;
+public record class GetCoursesOpenForEnrollmentQuery()
+    : IRequest<IReadOnlyList<CourseResponse>>;
 
 public class GetCoursesOpenForEnrollmentHandler(
     ICourseRepository courseRepository,
     IMapper mapper)
-    : IRequestHandler<GetCoursesOpenForEnrollmentQuery, GetCoursesOpenForEnrollmentResponse>
+    : IRequestHandler<GetCoursesOpenForEnrollmentQuery, IReadOnlyList<CourseResponse>>
 {
-    public async Task<GetCoursesOpenForEnrollmentResponse> Handle(
+    public async Task<IReadOnlyList<CourseResponse>> Handle(
         GetCoursesOpenForEnrollmentQuery request,
         CancellationToken cancellationToken)
     {
         var courses = await courseRepository.GetOpenForEnrollmentAsync();
 
-        return new GetCoursesOpenForEnrollmentResponse(
-            mapper.Map<IReadOnlyList<CourseResponse>>(courses));
+        return mapper.Map<IReadOnlyList<CourseResponse>>(courses);
     }
 }
