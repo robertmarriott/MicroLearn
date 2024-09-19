@@ -2,7 +2,7 @@
 
 public class CourseRepository(CatalogDbContext context) : ICourseRepository
 {
-    public async Task<List<Course>> GetAllAsync()
+    public async Task<IReadOnlyList<Course>> GetAllAsync()
     {
         return await context.Courses
             .Include(course => course.Prerequisites)
@@ -11,7 +11,7 @@ public class CourseRepository(CatalogDbContext context) : ICourseRepository
             .ToListAsync();
     }
 
-    public async Task<List<Course>> GetOpenForEnrollmentAsync()
+    public async Task<IReadOnlyList<Course>> GetOpenForEnrollmentAsync()
     {
         var currentDate = DateTime.Now;
 
@@ -23,7 +23,7 @@ public class CourseRepository(CatalogDbContext context) : ICourseRepository
             .ToListAsync();
     }
 
-    public async Task<List<Course>> GetByInstructorIdAsync(
+    public async Task<IReadOnlyList<Course>> GetByInstructorIdAsync(
         InstructorId instructorId)
     {
         return await context.Courses

@@ -14,6 +14,6 @@ public class GetCourseByIdHandler(
         var course = await courseRepository.GetByIdAsync(request.CourseId)
             ?? throw new CourseNotFoundException(request.CourseId);
 
-        return new GetCourseByIdResponse(mapper.Map<CourseDto>(course));
+        return new GetCourseByIdResponse(mapper.Map<CourseResponse>(course));
     }
 }

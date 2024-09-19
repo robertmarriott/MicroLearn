@@ -5,7 +5,7 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>> where TId : notnull
     public TId Id { get; protected init; }
 
     private readonly List<IDomainEvent> _domainEvents = [];
-    public IReadOnlyCollection<IDomainEvent> DomainEvents =>
+    public IReadOnlyList<IDomainEvent> DomainEvents =>
         _domainEvents.AsReadOnly();
 
 #pragma warning disable CS8618

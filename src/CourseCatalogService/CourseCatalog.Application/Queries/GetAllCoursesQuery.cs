@@ -12,6 +12,7 @@ public class GetAllCoursesHandler(
     {
         var courses = await courseRepository.GetAllAsync();
 
-        return new GetAllCoursesResponse(mapper.Map<List<CourseDto>>(courses));
+        return new GetAllCoursesResponse(
+            mapper.Map<IReadOnlyList<CourseResponse>>(courses));
     }
 }

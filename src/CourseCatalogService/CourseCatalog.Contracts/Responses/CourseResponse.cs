@@ -1,6 +1,6 @@
-﻿namespace CourseCatalog.Contracts.Dtos;
+﻿namespace CourseCatalog.Contracts.Responses;
 
-public record class CourseDto(
+public record class CourseResponse(
     Guid Id,
     Guid InstructorId,
     string Title,
@@ -9,4 +9,4 @@ public record class CourseDto(
     DateTime StartDate,
     DateTime EndDate,
     DateTime? CancellationDate,
-    List<PrerequisiteDto> Prerequisites);
+    IReadOnlyList<PrerequisiteResponse> Prerequisites);

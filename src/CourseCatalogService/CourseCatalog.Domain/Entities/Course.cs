@@ -10,10 +10,11 @@ public class Course : Entity<CourseId>
     public DateTime EndDate { get; private set; }
     public DateTime? CancellationDate { get; private set; } = null;
     public bool IsCancelled => CancellationDate is not null;
-    public bool IsOpenForEnrollment => !IsCancelled && StartDate > DateTime.UtcNow;
+    public bool IsOpenForEnrollment =>
+        !IsCancelled && StartDate > DateTime.UtcNow;
 
     private readonly List<Prerequisite> _prerequisites = [];
-    public IReadOnlyCollection<Prerequisite> Prerequisites =>
+    public IReadOnlyList<Prerequisite> Prerequisites =>
         _prerequisites.AsReadOnly();
 
     private Course(

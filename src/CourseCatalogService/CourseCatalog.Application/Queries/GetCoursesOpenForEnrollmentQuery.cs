@@ -15,6 +15,6 @@ public class GetCoursesOpenForEnrollmentHandler(
         var courses = await courseRepository.GetOpenForEnrollmentAsync();
 
         return new GetCoursesOpenForEnrollmentResponse(
-            mapper.Map<List<CourseDto>>(courses));
+            mapper.Map<IReadOnlyList<CourseResponse>>(courses));
     }
 }

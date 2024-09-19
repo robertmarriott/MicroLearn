@@ -1,3 +1,3 @@
 ﻿namespace CourseCatalog.Contracts.Responses;
 
-public record class GetCourseByIdResponse(CourseDto Course);
+public record class GetCourseByIdResponse(CourseResponse Course);
