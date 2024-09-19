@@ -2,14 +2,15 @@
 
 public record class AddPrerequisiteCommand(
     CourseId CourseId,
-    string Description) : IRequest<Prerequisite>;
+    string Description) : IRequest<PrerequisiteResponse>;
 
 public class AddPrerequisiteHandler(
     ICourseRepository courseRepository,
-    IUnitOfWork unitOfWork)
-    : IRequestHandler<AddPrerequisiteCommand, Prerequisite>
+    IUnitOfWork unitOfWork,
+    IMapper mapper)
+    : IRequestHandler<AddPrerequisiteCommand, PrerequisiteResponse>
 {
-    public async Task<Prerequisite> Handle(
+    public async Task<PrerequisiteResponse> Handle(
         AddPrerequisiteCommand request,
         CancellationToken cancellationToken)
     {
@@ -19,6 +20,6 @@ public class AddPrerequisiteHandler(
         var prerequisite = course.AddPrerequisite(request.Description);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return prerequisite;
+        return mapper.Map<PrerequisiteResponse>(prerequisite);
     }
 }
