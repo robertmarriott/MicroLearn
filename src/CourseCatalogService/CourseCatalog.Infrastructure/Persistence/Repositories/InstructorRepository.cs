@@ -5,7 +5,9 @@ public class InstructorRepository(CatalogDbContext context)
 {
     public async Task<IReadOnlyList<Instructor>> GetAllAsync()
     {
-        return await context.Instructors.ToListAsync();
+        return await context.Instructors
+            .AsNoTracking()
+            .ToListAsync();
     }
 
     public async Task<Instructor?> GetByIdAsync(InstructorId instructorId)
