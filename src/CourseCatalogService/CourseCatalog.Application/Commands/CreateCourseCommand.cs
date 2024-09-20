@@ -27,6 +27,7 @@ public class CreateCourseCommandHandler(
             request.EndDate);
 
         await courseRepository.AddAsync(course);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return mapper.Map<CourseResponse>(course);

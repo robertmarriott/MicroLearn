@@ -17,6 +17,7 @@ public class ChangeCourseSkillLevelCommandHandler(
             ?? throw new CourseNotFoundException(request.CourseId);
 
         course.ChangeSkillLevel(request.NewSkillLevel);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;

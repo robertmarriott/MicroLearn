@@ -16,6 +16,7 @@ public class ChangeCourseTitleCommandHandler(
             ?? throw new CourseNotFoundException(request.CourseId);
 
         course.ChangeTitle(request.NewTitle);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;

@@ -16,6 +16,7 @@ public class ChangeCoursePriceCommandHandler(
             ?? throw new CourseNotFoundException(request.CourseId);
 
         course.ChangePrice(request.NewPrice);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;

@@ -16,6 +16,7 @@ public class RemovePrerequisiteCommandHandler(
             ?? throw new CourseNotFoundException(request.CourseId);
 
         course.RemovePrerequisite(request.PrerequisiteId);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;

@@ -73,18 +73,21 @@ public class Course : Entity<CourseId>
         ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
 
         Title = newTitle;
+
         AddDomainEvent(new CourseTitleChangedEvent(Id, Title));
     }
 
     public void ChangeSkillLevel(SkillLevel newSkillLevel)
     {
         SkillLevel = newSkillLevel;
+
         AddDomainEvent(new CourseSkillLevelChangedEvent(Id, SkillLevel));
     }
 
     public void ChangePrice(Price newPrice)
     {
         Price = newPrice;
+
         AddDomainEvent(new CoursePriceChangedEvent(Id, Price));
     }
 
@@ -97,6 +100,7 @@ public class Course : Entity<CourseId>
                 nameof(newStartDate));
 
         StartDate = newStartDate;
+
         AddDomainEvent(new CourseStartDateChangedEvent(Id, StartDate));
     }
 
@@ -106,6 +110,7 @@ public class Course : Entity<CourseId>
             .ThrowIfLessThan(newEndDate, StartDate, nameof(newEndDate));
 
         EndDate = newEndDate;
+
         AddDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));
     }
 
@@ -124,13 +129,16 @@ public class Course : Entity<CourseId>
         }
 
         CancellationDate = DateTime.UtcNow;
+
         AddDomainEvent(new CourseCancelledEvent(Id, CancellationDate.Value));
     }
 
     public Prerequisite AddPrerequisite(string description)
     {
         var prerequisite = Prerequisite.Create(Id, description);
+
         _prerequisites.Add(prerequisite);
+
         AddDomainEvent(new PrerequisiteAddedEvent(Id, prerequisite.Id));
 
         return prerequisite;
@@ -143,6 +151,7 @@ public class Course : Entity<CourseId>
             ?? throw new PrerequisiteNotFoundException(prerequisiteId);
 
         _prerequisites.Remove(prerequisite);
+
         AddDomainEvent(new PrerequisiteRemovedEvent(Id, prerequisite.Id));
     }
 }

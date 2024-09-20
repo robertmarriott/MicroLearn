@@ -18,6 +18,7 @@ public class AddPrerequisiteCommandHandler(
             ?? throw new CourseNotFoundException(request.CourseId);
 
         var prerequisite = course.AddPrerequisite(request.Description);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return mapper.Map<PrerequisiteResponse>(prerequisite);

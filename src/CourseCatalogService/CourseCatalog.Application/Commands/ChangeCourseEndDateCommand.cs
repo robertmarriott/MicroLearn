@@ -16,6 +16,7 @@ public class ChangeCourseEndDateCommandHandler(
             ?? throw new CourseNotFoundException(request.CourseId);
 
         course.ChangeEndDate(request.NewEndDate);
+
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
