@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace CourseCatalog.Infrastructure;
+﻿namespace CourseCatalog.Infrastructure;
 
 public static class ServiceCollectionExtensions
 {

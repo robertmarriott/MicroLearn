@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace CourseCatalog.Infrastructure.Persistence;
+﻿namespace CourseCatalog.Infrastructure.Persistence;
 
 public class CatalogDbContext(DbContextOptions<CatalogDbContext> options)
     : DbContext(options)
