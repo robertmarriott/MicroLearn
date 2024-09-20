@@ -4,7 +4,7 @@ public record class ChangeCourseStartDateCommand(
     CourseId CourseId,
     DateTime NewStartDate) : IRequest<Unit>;
 
-public class ChangeCourseStartDateHandler(
+public class ChangeCourseStartDateCommandHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork)
     : IRequestHandler<ChangeCourseStartDateCommand, Unit>

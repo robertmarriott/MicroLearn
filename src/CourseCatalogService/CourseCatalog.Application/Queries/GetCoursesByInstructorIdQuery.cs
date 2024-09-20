@@ -1,10 +1,9 @@
-﻿
-namespace CourseCatalog.Application.Queries;
+﻿namespace CourseCatalog.Application.Queries;
 
 public record class GetCoursesByInstructorIdQuery(InstructorId InstructorId)
     : IRequest<IReadOnlyList<CourseResponse>>;
 
-public class GetCoursesByInstructorIdHandler(
+public class GetCoursesByInstructorIdQueryHandler(
     ICourseRepository courseRepository,
     IInstructorRepository instructorRepository,
     IMapper mapper)

@@ -3,7 +3,7 @@
 public record class GetCourseByIdQuery(CourseId CourseId)
     : IRequest<CourseResponse>;
 
-public class GetCourseByIdHandler(
+public class GetCourseByIdQueryHandler(
     ICourseRepository courseRepository,
     IMapper mapper) : IRequestHandler<GetCourseByIdQuery, CourseResponse>
 {

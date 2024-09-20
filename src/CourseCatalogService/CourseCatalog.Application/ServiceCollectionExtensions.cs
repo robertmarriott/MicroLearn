@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
-
-namespace CourseCatalog.Application;
+﻿namespace CourseCatalog.Application;
 
 public static class ServiceCollectionExtensions
 {

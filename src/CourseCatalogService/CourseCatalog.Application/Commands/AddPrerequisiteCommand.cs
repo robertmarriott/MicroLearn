@@ -4,7 +4,7 @@ public record class AddPrerequisiteCommand(
     CourseId CourseId,
     string Description) : IRequest<PrerequisiteResponse>;
 
-public class AddPrerequisiteHandler(
+public class AddPrerequisiteCommandHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper)

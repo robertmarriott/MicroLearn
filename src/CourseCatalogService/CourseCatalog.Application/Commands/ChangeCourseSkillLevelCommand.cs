@@ -4,7 +4,7 @@ public record class ChangeCourseSkillLevelCommand(
     CourseId CourseId,
     SkillLevel NewSkillLevel) : IRequest<Unit>;
 
-public class ChangeCourseSkillLevelHandler(
+public class ChangeCourseSkillLevelCommandHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork)
     : IRequestHandler<ChangeCourseSkillLevelCommand, Unit>

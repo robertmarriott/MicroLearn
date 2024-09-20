@@ -8,7 +8,7 @@ public record class CreateCourseCommand(
     DateTime StartDate,
     DateTime EndDate) : IRequest<CourseResponse>;
 
-public class CreateCourseHandler(
+public class CreateCourseCommandHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper)

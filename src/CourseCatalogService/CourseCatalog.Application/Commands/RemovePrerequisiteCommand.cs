@@ -4,7 +4,7 @@ public record class RemovePrerequisiteCommand(
     CourseId CourseId,
     PrerequisiteId PrerequisiteId) : IRequest<Unit>;
 
-public class RemovePrerequisiteHandler(
+public class RemovePrerequisiteCommandHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<RemovePrerequisiteCommand, Unit>
 {

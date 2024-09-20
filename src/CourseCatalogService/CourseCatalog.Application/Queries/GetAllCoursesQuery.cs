@@ -3,7 +3,7 @@
 public record class GetAllCoursesQuery()
     : IRequest<IReadOnlyList<CourseResponse>>;
 
-public class GetAllCoursesHandler(
+public class GetAllCoursesQueryHandler(
     ICourseRepository courseRepository,
     IMapper mapper)
     : IRequestHandler<GetAllCoursesQuery, IReadOnlyList<CourseResponse>>

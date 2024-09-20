@@ -3,7 +3,7 @@
 public record class GetCoursesOpenForEnrollmentQuery()
     : IRequest<IReadOnlyList<CourseResponse>>;
 
-public class GetCoursesOpenForEnrollmentHandler(
+public class GetCoursesOpenForEnrollmentQueryHandler(
     ICourseRepository courseRepository,
     IMapper mapper)
     : IRequestHandler<GetCoursesOpenForEnrollmentQuery, IReadOnlyList<CourseResponse>>

@@ -4,7 +4,7 @@ public record class ChangeCourseTitleCommand(
     CourseId CourseId,
     string NewTitle) : IRequest<Unit>;
 
-public class ChangeCourseTitleHandler(
+public class ChangeCourseTitleCommandHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<ChangeCourseTitleCommand, Unit>
 {

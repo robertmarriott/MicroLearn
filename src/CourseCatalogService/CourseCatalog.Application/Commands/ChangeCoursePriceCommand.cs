@@ -4,7 +4,7 @@ public record class ChangeCoursePriceCommand(
     CourseId CourseId,
     Price NewPrice) : IRequest<Unit>;
 
-public class ChangeCoursePriceHandler(
+public class ChangeCoursePriceCommandHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<ChangeCoursePriceCommand, Unit>
 {
