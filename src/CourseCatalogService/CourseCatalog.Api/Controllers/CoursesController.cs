@@ -15,13 +15,48 @@ public class CoursesController(IMediator mediator, IMapper mapper)
         return Ok(response);
     }
 
-    [HttpGet("{courseId:guid}")]
-    public async Task<IActionResult> GetById(Guid courseId)
+    [HttpGet("open-for-enrollment")]
+    public async Task<IActionResult> GetOpenForEnrollment()
     {
-        var query = mapper.Map<GetCourseByIdQuery>(courseId);
+        var query = new GetCoursesOpenForEnrollmentQuery();
 
         var response = await mediator.Send(query);
 
         return Ok(response);
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var query = mapper.Map<GetCourseByIdQuery>(id);
+
+        var response = await mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateCourseRequest request)
+    {
+        // TODO: Include InstructorId
+        var command = mapper.Map<CreateCourseCommand>(request);
+
+        var response = await mediator.Send(command);
+
+        return CreatedAtAction(
+            nameof(GetById), new { id = response.Id }, response);
+    }
+
+    [HttpPost("{id:guid}/title")]
+    public async Task<IActionResult> ChangeTitle(
+        Guid id,
+        ChangeCourseTitleRequest request)
+    {
+        // TODO: Ensure only the owner of the course can modify it
+        var command = mapper.Map<ChangeCourseTitleCommand>((id, request));
+
+        await mediator.Send(command);
+
+        return NoContent();
     }
 }

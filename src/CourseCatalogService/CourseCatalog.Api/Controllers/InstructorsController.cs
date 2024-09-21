@@ -13,20 +13,20 @@ public class InstructorsController(IMediator mediator, IMapper mapper)
         return Ok(response);
     }
 
-    [HttpGet("{instructorId:guid}")]
-    public async Task<IActionResult> GetById(Guid instructorId)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
     {
-        var query = mapper.Map<GetInstructorByIdQuery>(instructorId);
+        var query = mapper.Map<GetInstructorByIdQuery>(id);
 
         var response = await mediator.Send(query);
 
         return Ok(response);
     }
 
-    [HttpGet("{instructorId:guid}/courses")]
-    public async Task<IActionResult> GetCoursesByInstructorId(Guid instructorId)
+    [HttpGet("{id:guid}/courses")]
+    public async Task<IActionResult> GetCourses(Guid id)
     {
-        var query = mapper.Map<GetCoursesByInstructorIdQuery>(instructorId);
+        var query = mapper.Map<GetCoursesByInstructorIdQuery>(id);
 
         var response = await mediator.Send(query);
 
