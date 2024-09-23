@@ -11,18 +11,6 @@ public class CourseRepository(CatalogDbContext context) : ICourseRepository
             .ToListAsync();
     }
 
-    public async Task<IReadOnlyList<Course>> GetOpenForEnrollmentAsync()
-    {
-        var currentDate = DateTime.Now;
-
-        return await context.Courses
-            .Where(course => course.IsOpenForEnrollment)
-            .Include(course => course.Prerequisites)
-            .OrderByDescending(course => course.StartDate)
-            .AsNoTracking()
-            .ToListAsync();
-    }
-
     public async Task<IReadOnlyList<Course>> GetByInstructorIdAsync(
         InstructorId instructorId)
     {

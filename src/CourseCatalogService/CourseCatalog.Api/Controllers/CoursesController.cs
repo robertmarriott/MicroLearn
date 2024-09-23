@@ -15,16 +15,6 @@ public class CoursesController(IMediator mediator, IMapper mapper)
         return Ok(response);
     }
 
-    [HttpGet("open-for-enrollment")]
-    public async Task<IActionResult> GetOpenForEnrollment()
-    {
-        var query = new GetCoursesOpenForEnrollmentQuery();
-
-        var response = await mediator.Send(query);
-
-        return Ok(response);
-    }
-
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetById(Guid id)
     {
