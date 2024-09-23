@@ -15,10 +15,10 @@ public class CoursesController(IMediator mediator, IMapper mapper)
         return Ok(response);
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("{courseId:guid}")]
+    public async Task<IActionResult> GetById(Guid courseId)
     {
-        var query = mapper.Map<GetCourseByIdQuery>(id);
+        var query = mapper.Map<GetCourseByIdQuery>(courseId);
 
         var response = await mediator.Send(query);
 
@@ -37,13 +37,13 @@ public class CoursesController(IMediator mediator, IMapper mapper)
             nameof(GetById), new { id = response.Id }, response);
     }
 
-    [HttpPost("{id:guid}/title")]
+    [HttpPost("{courseId:guid}/title")]
     public async Task<IActionResult> ChangeTitle(
-        Guid id,
+        Guid courseId,
         ChangeCourseTitleRequest request)
     {
         // TODO: Ensure only the owner of the course can modify it
-        var command = mapper.Map<ChangeCourseTitleCommand>((id, request));
+        var command = mapper.Map<ChangeCourseTitleCommand>((courseId, request));
 
         await mediator.Send(command);
 
