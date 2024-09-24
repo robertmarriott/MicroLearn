@@ -3,9 +3,12 @@
 public class InstructorRepository(CatalogDbContext context)
     : IInstructorRepository
 {
-    public async Task<IReadOnlyList<Instructor>> GetAllAsync()
+    public async Task<IReadOnlyList<Instructor>> GetAllAsync(
+        int pageIndex, int pageSize)
     {
         return await context.Instructors
+            .Skip((pageIndex - 1) * pageSize)
+            .Take(pageSize)
             .AsNoTracking()
             .ToListAsync();
     }
@@ -20,6 +23,11 @@ public class InstructorRepository(CatalogDbContext context)
     {
         return await context.Instructors
             .AnyAsync(instructor => instructor.Id == instructorId);
+    }
+
+    public async Task<int> CountAsync()
+    {
+        return await context.Instructors.CountAsync();
     }
 
     public async Task AddAsync(Instructor instructor)

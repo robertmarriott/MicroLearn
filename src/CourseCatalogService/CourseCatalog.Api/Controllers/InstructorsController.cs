@@ -14,7 +14,8 @@ public class InstructorsController(IMediator mediator, IMapper mapper)
     }
 
     [HttpGet("{instructorId:guid}")]
-    public async Task<IActionResult> GetById(Guid instructorId)
+    public async Task<ActionResult<InstructorResponse>> GetById(
+        [FromRoute] Guid instructorId)
     {
         var query = mapper.Map<GetInstructorByIdQuery>(instructorId);
 
@@ -24,7 +25,7 @@ public class InstructorsController(IMediator mediator, IMapper mapper)
     }
 
     [HttpGet("{instructorId:guid}/courses")]
-    public async Task<IActionResult> GetCourses(Guid instructorId)
+    public async Task<IActionResult> GetCourses([FromRoute] Guid instructorId)
     {
         var query = mapper.Map<GetCoursesByInstructorIdQuery>(instructorId);
 
