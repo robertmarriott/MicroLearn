@@ -1,4 +1,6 @@
-﻿namespace CourseCatalog.Application.Commands;
+﻿using SharedKernel.Domain;
+
+namespace CourseCatalog.Application.Commands;
 
 public record class ChangeCourseStartDateCommand(
     CourseId CourseId,

@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Domain.Interfaces;
+﻿namespace SharedKernel.Domain;
 
 public interface IUnitOfWork
 {
