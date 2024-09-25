@@ -2,12 +2,12 @@ namespace SharedKernel.Domain;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
+    private const int HashMultiplier = 31;
+
     protected abstract IEnumerable<object> GetEqualityComponents();
 
     public override int GetHashCode()
     {
-        const int HashMultiplier = 31;
-
         return GetEqualityComponents().Aggregate(0, (hash, value) =>
             hash * HashMultiplier ^ (value?.GetHashCode() ?? 0));
     }
