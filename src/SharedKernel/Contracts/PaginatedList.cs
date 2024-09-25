@@ -4,7 +4,7 @@ public class PaginatedList<TEntity>(
     IReadOnlyList<TEntity> items,
     int totalCount,
     int pageNumber,
-    int pageSize)
+    int pageSize) where TEntity : class
 {
     public IReadOnlyList<TEntity> Items { get; } = items;
     public int TotalCount { get; } = totalCount;
