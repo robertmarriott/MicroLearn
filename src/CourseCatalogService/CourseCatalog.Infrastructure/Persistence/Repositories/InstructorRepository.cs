@@ -4,10 +4,10 @@ public class InstructorRepository(CatalogDbContext context)
     : IInstructorRepository
 {
     public async Task<IReadOnlyList<Instructor>> GetAllAsync(
-        int pageIndex, int pageSize)
+        int pageNumber, int pageSize)
     {
         return await context.Instructors
-            .Skip((pageIndex - 1) * pageSize)
+            .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .AsNoTracking()
             .ToListAsync();

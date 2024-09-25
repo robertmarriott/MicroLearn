@@ -2,7 +2,7 @@
 
 public interface IInstructorRepository
 {
-    Task<IReadOnlyList<Instructor>> GetAllAsync(int pageIndex, int pageSize);
+    Task<IReadOnlyList<Instructor>> GetAllAsync(int pageNumber, int pageSize);
 
     Task<Instructor?> GetByIdAsync(InstructorId instructorId);
 

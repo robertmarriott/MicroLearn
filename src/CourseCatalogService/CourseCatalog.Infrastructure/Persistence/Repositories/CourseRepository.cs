@@ -3,12 +3,12 @@
 public class CourseRepository(CatalogDbContext context) : ICourseRepository
 {
     public async Task<IReadOnlyList<Course>> GetAllAsync(
-        int pageIndex, int pageSize)
+        int pageNumber, int pageSize)
     {
         return await context.Courses
             .Include(course => course.Prerequisites)
             .OrderByDescending(course => course.StartDate)
-            .Skip((pageIndex - 1) * pageSize)
+            .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .AsNoTracking()
             .ToListAsync();
