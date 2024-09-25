@@ -1,6 +1,4 @@
-﻿using SharedKernel.Domain;
-
-namespace CourseCatalog.Infrastructure.Persistence;
+﻿namespace CourseCatalog.Infrastructure.Persistence;
 
 public class UnitOfWork(CatalogDbContext context) : IUnitOfWork
 {
