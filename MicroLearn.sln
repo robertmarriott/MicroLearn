@@ -7,25 +7,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B2FDDEB1-862
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CourseCatalogService", "CourseCatalogService", "{92CF3CE6-5713-4BED-8F54-861477AAEC47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseCatalog.Api", "src\CourseCatalogService\CourseCatalog.Api\CourseCatalog.Api.csproj", "{435131CC-A40C-4C4E-90EF-3D8C5F95A100}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseCatalog.Api", "src\CourseCatalogService\CourseCatalog.Api\CourseCatalog.Api.csproj", "{435131CC-A40C-4C4E-90EF-3D8C5F95A100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseCatalog.Application", "src\CourseCatalogService\CourseCatalog.Application\CourseCatalog.Application.csproj", "{B9B6418A-D35F-41F3-A0A7-0229900A87A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseCatalog.Application", "src\CourseCatalogService\CourseCatalog.Application\CourseCatalog.Application.csproj", "{B9B6418A-D35F-41F3-A0A7-0229900A87A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseCatalog.Contracts", "src\CourseCatalogService\CourseCatalog.Contracts\CourseCatalog.Contracts.csproj", "{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseCatalog.Contracts", "src\CourseCatalogService\CourseCatalog.Contracts\CourseCatalog.Contracts.csproj", "{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseCatalog.Domain", "src\CourseCatalogService\CourseCatalog.Domain\CourseCatalog.Domain.csproj", "{E54E2AF7-118D-4A55-AAE6-0E92383E3BCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseCatalog.Domain", "src\CourseCatalogService\CourseCatalog.Domain\CourseCatalog.Domain.csproj", "{E54E2AF7-118D-4A55-AAE6-0E92383E3BCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseCatalog.Infrastructure", "src\CourseCatalogService\CourseCatalog.Infrastructure\CourseCatalog.Infrastructure.csproj", "{879032EC-2A05-4E95-AF7B-BB48F40EB69A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseCatalog.Infrastructure", "src\CourseCatalogService\CourseCatalog.Infrastructure\CourseCatalog.Infrastructure.csproj", "{879032EC-2A05-4E95-AF7B-BB48F40EB69A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "src\SharedKernel\SharedKernel.csproj", "{71D98312-201B-43DF-AA14-0864DA40C192}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedKernel", "src\SharedKernel\SharedKernel.csproj", "{71D98312-201B-43DF-AA14-0864DA40C192}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{50F20178-BC1B-46E0-903D-E2E8BB809118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{435131CC-A40C-4C4E-90EF-3D8C5F95A100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,6 +35,10 @@ Global
 		{B9B6418A-D35F-41F3-A0A7-0229900A87A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9B6418A-D35F-41F3-A0A7-0229900A87A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9B6418A-D35F-41F3-A0A7-0229900A87A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E54E2AF7-118D-4A55-AAE6-0E92383E3BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E54E2AF7-118D-4A55-AAE6-0E92383E3BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E54E2AF7-118D-4A55-AAE6-0E92383E3BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,22 +47,25 @@ Global
 		{879032EC-2A05-4E95-AF7B-BB48F40EB69A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{879032EC-2A05-4E95-AF7B-BB48F40EB69A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{879032EC-2A05-4E95-AF7B-BB48F40EB69A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71D98312-201B-43DF-AA14-0864DA40C192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{71D98312-201B-43DF-AA14-0864DA40C192}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71D98312-201B-43DF-AA14-0864DA40C192}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71D98312-201B-43DF-AA14-0864DA40C192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F20178-BC1B-46E0-903D-E2E8BB809118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F20178-BC1B-46E0-903D-E2E8BB809118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F20178-BC1B-46E0-903D-E2E8BB809118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F20178-BC1B-46E0-903D-E2E8BB809118}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{92CF3CE6-5713-4BED-8F54-861477AAEC47} = {B2FDDEB1-8626-4A70-A589-0443A61B34CD}
 		{435131CC-A40C-4C4E-90EF-3D8C5F95A100} = {92CF3CE6-5713-4BED-8F54-861477AAEC47}
 		{B9B6418A-D35F-41F3-A0A7-0229900A87A4} = {92CF3CE6-5713-4BED-8F54-861477AAEC47}
+		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490} = {92CF3CE6-5713-4BED-8F54-861477AAEC47}
 		{E54E2AF7-118D-4A55-AAE6-0E92383E3BCC} = {92CF3CE6-5713-4BED-8F54-861477AAEC47}
 		{879032EC-2A05-4E95-AF7B-BB48F40EB69A} = {92CF3CE6-5713-4BED-8F54-861477AAEC47}
-		{68A7CCB4-1F0C-4493-A1F3-AB61B403F490} = {92CF3CE6-5713-4BED-8F54-861477AAEC47}
 		{71D98312-201B-43DF-AA14-0864DA40C192} = {B2FDDEB1-8626-4A70-A589-0443A61B34CD}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,6 @@
+services:
+  coursecatalog.api:
+    image: ${DOCKER_REGISTRY-}coursecatalogapi
+    build:
+      context: .
+      dockerfile: src/CourseCatalogService/CourseCatalog.Api/Dockerfile
