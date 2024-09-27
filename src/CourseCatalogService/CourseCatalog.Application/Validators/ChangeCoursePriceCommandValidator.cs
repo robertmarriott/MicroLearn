@@ -1,5 +1,7 @@
-﻿namespace CourseCatalog.Application.Validators;
+﻿using CourseCatalog.Application.Commands;
+using FluentValidation;
 
+namespace CourseCatalog.Application.Validators;
 public class ChangeCoursePriceCommandValidator
     : AbstractValidator<ChangeCoursePriceCommand>
 {

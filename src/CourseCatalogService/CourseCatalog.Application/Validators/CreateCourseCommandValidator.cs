@@ -1,4 +1,7 @@
-﻿namespace CourseCatalog.Application.Validators;
+﻿using CourseCatalog.Application.Courses.Commands.CreateCourse;
+using FluentValidation;
+
+namespace CourseCatalog.Application.Validators;
 
 public class CreateCourseCommandValidator
     : AbstractValidator<CreateCourseCommand>

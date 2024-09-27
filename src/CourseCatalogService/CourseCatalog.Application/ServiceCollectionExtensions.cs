@@ -1,4 +1,9 @@
-﻿namespace CourseCatalog.Application;
+﻿using CourseCatalog.Application.Common.Behaviors;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+
+namespace CourseCatalog.Application;
 
 public static class ServiceCollectionExtensions
 {

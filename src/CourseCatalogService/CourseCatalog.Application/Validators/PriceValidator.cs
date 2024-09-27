@@ -1,4 +1,7 @@
-﻿namespace CourseCatalog.Application.Validators;
+﻿using CourseCatalog.Domain.Courses.ValueObjects;
+using FluentValidation;
+
+namespace CourseCatalog.Application.Validators;
 
 public class PriceValidator : AbstractValidator<Price>
 {

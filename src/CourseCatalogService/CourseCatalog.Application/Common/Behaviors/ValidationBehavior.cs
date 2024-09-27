@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Application.Behaviors;
+﻿namespace CourseCatalog.Application.Common.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse>(
     IEnumerable<IValidator<TRequest>> validators)
@@ -17,8 +17,8 @@ public class ValidationBehavior<TRequest, TResponse>(
 
         var context = new ValidationContext<TRequest>(request);
 
-        var results = await Task
-            .WhenAll(validators.Select(v => v.ValidateAsync(context)));
+        var results = await Task.WhenAll(
+            validators.Select(validator => validator.ValidateAsync(context)));
 
         var failures = results
             .Where(result => !result.IsValid)
