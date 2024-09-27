@@ -1,4 +1,4 @@
-namespace CourseCatalog.Domain.Common.Models;
+namespace CourseCatalog.Domain.Common.Base;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {

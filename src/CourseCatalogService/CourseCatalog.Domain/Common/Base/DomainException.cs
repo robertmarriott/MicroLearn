@@ -1,4 +1,4 @@
-﻿namespace CourseCatalog.Domain.Common.Models;
+﻿namespace CourseCatalog.Domain.Common.Base;
 
 public class DomainException(string message) : Exception(message)
 {

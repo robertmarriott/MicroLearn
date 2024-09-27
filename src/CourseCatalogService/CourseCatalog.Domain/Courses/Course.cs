@@ -1,4 +1,4 @@
-﻿using CourseCatalog.Domain.Common.Models;
+﻿using CourseCatalog.Domain.Common.Base;
 using CourseCatalog.Domain.Courses.Entities;
 using CourseCatalog.Domain.Courses.Enums;
 using CourseCatalog.Domain.Courses.Events;
@@ -8,7 +8,7 @@ using CourseCatalog.Domain.Instructors.ValueObjects;
 
 namespace CourseCatalog.Domain.Courses;
 
-public class Course : Entity<CourseId>
+public class Course : AggregateRoot<CourseId>
 {
     public InstructorId InstructorId { get; }
     public string Title { get; private set; }
@@ -146,7 +146,7 @@ public class Course : Entity<CourseId>
     public void RemovePrerequisite(PrerequisiteId prerequisiteId)
     {
         var prerequisite = _prerequisites
-            .FirstOrDefault(p => p.Id == prerequisiteId)
+            .FirstOrDefault(prerequisite => prerequisite.Id == prerequisiteId)
             ?? throw new PrerequisiteNotFoundException(prerequisiteId);
 
         _prerequisites.Remove(prerequisite);

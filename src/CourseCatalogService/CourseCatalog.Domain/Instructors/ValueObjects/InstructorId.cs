@@ -1,4 +1,4 @@
-﻿using CourseCatalog.Domain.Common.Models;
+﻿using CourseCatalog.Domain.Common.Base;
 
 namespace CourseCatalog.Domain.Instructors.ValueObjects;
 

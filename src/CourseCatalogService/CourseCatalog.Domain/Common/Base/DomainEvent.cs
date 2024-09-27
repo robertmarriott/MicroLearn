@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CourseCatalog.Domain.Common.Models;
+namespace CourseCatalog.Domain.Common.Base;
 
 public abstract record class DomainEvent : INotification
 {

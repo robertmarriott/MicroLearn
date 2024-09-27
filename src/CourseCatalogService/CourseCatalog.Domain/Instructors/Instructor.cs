@@ -1,9 +1,9 @@
-﻿using CourseCatalog.Domain.Common.Models;
+﻿using CourseCatalog.Domain.Common.Base;
 using CourseCatalog.Domain.Instructors.ValueObjects;
 
 namespace CourseCatalog.Domain.Instructors;
 
-public class Instructor : Entity<InstructorId>
+public class Instructor : AggregateRoot<InstructorId>
 {
     public string UserName { get; }
 
