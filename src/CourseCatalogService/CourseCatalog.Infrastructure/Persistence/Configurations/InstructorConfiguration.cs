@@ -1,4 +1,9 @@
-﻿namespace CourseCatalog.Infrastructure.Persistence.Configurations;
+﻿using CourseCatalog.Domain.Instructors;
+using CourseCatalog.Domain.Instructors.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CourseCatalog.Infrastructure.Persistence.Configurations;
 
 public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
 {

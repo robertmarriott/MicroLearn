@@ -1,4 +1,9 @@
-﻿namespace CourseCatalog.Infrastructure.Persistence.Repositories;
+﻿using CourseCatalog.Domain.Courses;
+using CourseCatalog.Domain.Courses.ValueObjects;
+using CourseCatalog.Domain.Instructors.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+
+namespace CourseCatalog.Infrastructure.Persistence.Repositories;
 
 public class CourseRepository(CatalogDbContext context) : ICourseRepository
 {

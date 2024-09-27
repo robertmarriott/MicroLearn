@@ -1,4 +1,9 @@
-﻿namespace CourseCatalog.Infrastructure.Persistence;
+﻿using CourseCatalog.Domain.Courses;
+using CourseCatalog.Domain.Instructors;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
+namespace CourseCatalog.Infrastructure.Persistence;
 
 public class CatalogDbContext(DbContextOptions<CatalogDbContext> options)
     : DbContext(options)

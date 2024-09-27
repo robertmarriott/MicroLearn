@@ -1,4 +1,6 @@
-﻿namespace CourseCatalog.Infrastructure.Persistence;
+﻿using CourseCatalog.Application.Common.Interfaces;
+
+namespace CourseCatalog.Infrastructure.Persistence;
 
 public class UnitOfWork(CatalogDbContext context) : IUnitOfWork
 {

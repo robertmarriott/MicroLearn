@@ -1,4 +1,9 @@
-﻿namespace CourseCatalog.Infrastructure.Persistence.Configurations;
+﻿using CourseCatalog.Domain.Courses.Entities;
+using CourseCatalog.Domain.Courses.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CourseCatalog.Infrastructure.Persistence.Configurations;
 
 public class PrerequisiteConfiguration : IEntityTypeConfiguration<Prerequisite>
 {

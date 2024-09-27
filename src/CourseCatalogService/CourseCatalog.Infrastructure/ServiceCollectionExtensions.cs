@@ -1,4 +1,12 @@
-﻿namespace CourseCatalog.Infrastructure;
+﻿using CourseCatalog.Application.Common.Interfaces;
+using CourseCatalog.Domain.Courses;
+using CourseCatalog.Infrastructure.Persistence;
+using CourseCatalog.Infrastructure.Persistence.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace CourseCatalog.Infrastructure;
 
 public static class ServiceCollectionExtensions
 {
