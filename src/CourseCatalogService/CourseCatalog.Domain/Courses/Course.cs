@@ -22,6 +22,7 @@ public class Course : AggregateRoot<CourseId>
         !IsCancelled && StartDate > DateTime.UtcNow;
 
     private readonly List<Prerequisite> _prerequisites = [];
+
     public IReadOnlyList<Prerequisite> Prerequisites =>
         _prerequisites.AsReadOnly();
 
