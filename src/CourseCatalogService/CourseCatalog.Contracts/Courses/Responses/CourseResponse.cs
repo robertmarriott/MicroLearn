@@ -8,6 +8,7 @@ public record class CourseResponse(
     string Title,
     string SkillLevel,
     PriceDto Price,
+    bool IsFree,
     DateTime StartDate,
     DateTime EndDate,
     DateTime? CancellationDate,

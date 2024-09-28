@@ -16,6 +16,7 @@ public class Course : AggregateRoot<CourseId>
     public string Title { get; private set; }
     public SkillLevel SkillLevel { get; private set; }
     public Price Price { get; private set; }
+    public bool IsFree => Price.IsFree;
     public DateTime StartDate { get; private set; }
     public DateTime EndDate { get; private set; }
     public DateTime? CancellationDate { get; private set; } = null;

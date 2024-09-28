@@ -7,6 +7,7 @@ public class Price : ValueObject
 {
     public decimal Amount { get; }
     public Currency Currency { get; }
+    public bool IsFree => Amount == 0m;
 
     private Price(decimal amount, Currency currency)
     {

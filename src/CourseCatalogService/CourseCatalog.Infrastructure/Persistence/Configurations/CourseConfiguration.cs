@@ -28,7 +28,11 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
             priceBuilder.Property(price => price.Amount).IsRequired();
 
             priceBuilder.Property(price => price.Currency).IsRequired();
+
+            priceBuilder.Ignore(price => price.IsFree);
         });
+
+        builder.Ignore(course => course.IsFree);
 
         builder.Property(course => course.StartDate).IsRequired();
 
