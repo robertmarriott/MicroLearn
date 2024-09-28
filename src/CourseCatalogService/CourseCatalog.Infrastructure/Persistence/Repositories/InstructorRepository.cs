@@ -7,7 +7,7 @@ namespace CourseCatalog.Infrastructure.Persistence.Repositories;
 public class InstructorRepository(CatalogDbContext context)
     : IInstructorRepository
 {
-    public async Task<IReadOnlyList<Instructor>> GetAllAsync(
+    public async Task<IReadOnlyList<Instructor>> ListAsync(
         int pageNumber, int pageSize)
     {
         return await context.Instructors
