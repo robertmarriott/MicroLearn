@@ -10,6 +10,8 @@ namespace CourseCatalog.Domain.Courses;
 
 public class Course : AggregateRoot<CourseId>
 {
+    private readonly List<Prerequisite> _prerequisites = [];
+
     public InstructorId InstructorId { get; }
     public string Title { get; private set; }
     public SkillLevel SkillLevel { get; private set; }
@@ -20,9 +22,6 @@ public class Course : AggregateRoot<CourseId>
     public bool IsCancelled => CancellationDate is not null;
     public bool IsOpenForEnrollment =>
         !IsCancelled && StartDate > DateTime.UtcNow;
-
-    private readonly List<Prerequisite> _prerequisites = [];
-
     public IReadOnlyList<Prerequisite> Prerequisites =>
         _prerequisites.AsReadOnly();
 
