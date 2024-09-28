@@ -22,6 +22,7 @@ public class Course : AggregateRoot<CourseId>
     public bool IsCancelled => CancellationDate is not null;
     public bool IsOpenForEnrollment =>
         !IsCancelled && StartDate > DateTime.UtcNow;
+
     public IReadOnlyList<Prerequisite> Prerequisites =>
         _prerequisites.AsReadOnly();
 
