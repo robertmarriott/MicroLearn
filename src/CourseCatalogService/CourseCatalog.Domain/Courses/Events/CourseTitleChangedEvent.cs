@@ -5,4 +5,4 @@ namespace CourseCatalog.Domain.Courses.Events;
 
 public record class CourseTitleChangedEvent(
     CourseId CourseId,
-    string NewTitle) : DomainEvent;
+    string NewTitle) : IDomainEvent;

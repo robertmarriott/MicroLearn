@@ -42,5 +42,7 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
             .WithOne()
             .HasForeignKey(prerequisite => prerequisite.CourseId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Ignore(course => course.DomainEvents);
     }
 }

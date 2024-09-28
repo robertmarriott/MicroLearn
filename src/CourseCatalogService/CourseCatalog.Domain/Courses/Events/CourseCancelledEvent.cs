@@ -5,4 +5,4 @@ namespace CourseCatalog.Domain.Courses.Events;
 
 public record class CourseCancelledEvent(
     CourseId CourseId,
-    DateTime CancellationDate) : DomainEvent;
+    DateTime CancellationDate) : IDomainEvent;

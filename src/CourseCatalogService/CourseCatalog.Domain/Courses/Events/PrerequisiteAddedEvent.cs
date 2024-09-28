@@ -5,4 +5,4 @@ namespace CourseCatalog.Domain.Courses.Events;
 
 public record class PrerequisiteAddedEvent(
     CourseId CourseId,
-    PrerequisiteId PrerequisiteId) : DomainEvent;
+    PrerequisiteId PrerequisiteId) : IDomainEvent;

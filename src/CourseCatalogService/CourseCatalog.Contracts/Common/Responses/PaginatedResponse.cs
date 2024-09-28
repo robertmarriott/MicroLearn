@@ -1,6 +1,6 @@
-﻿namespace CourseCatalog.Contracts.Common.Dtos;
+﻿namespace CourseCatalog.Contracts.Common.Responses;
 
-public class PaginatedListDto<T>(
+public class PaginatedResponse<T>(
     IEnumerable<T> items,
     int totalCount,
     int pageNumber,

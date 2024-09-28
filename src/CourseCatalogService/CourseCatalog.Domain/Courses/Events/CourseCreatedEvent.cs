@@ -6,4 +6,4 @@ namespace CourseCatalog.Domain.Courses.Events;
 
 public record class CourseCreatedEvent(
     InstructorId InstructorId,
-    CourseId CourseId) : DomainEvent;
+    CourseId CourseId) : IDomainEvent;

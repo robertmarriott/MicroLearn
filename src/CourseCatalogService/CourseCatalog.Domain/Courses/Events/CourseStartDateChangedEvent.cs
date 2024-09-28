@@ -5,4 +5,4 @@ namespace CourseCatalog.Domain.Courses.Events;
 
 public record class CourseStartDateChangedEvent(
     CourseId CourseId,
-    DateTime NewStartDate) : DomainEvent;
+    DateTime NewStartDate) : IDomainEvent;

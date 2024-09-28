@@ -18,5 +18,7 @@ public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
         builder.Property(instructor => instructor.UserName)
             .IsRequired()
             .HasMaxLength(100);
+
+        builder.Ignore(Instructor => Instructor.DomainEvents);
     }
 }

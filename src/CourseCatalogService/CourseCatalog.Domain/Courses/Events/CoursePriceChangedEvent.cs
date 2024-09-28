@@ -5,4 +5,4 @@ namespace CourseCatalog.Domain.Courses.Events;
 
 public record class CoursePriceChangedEvent(
     CourseId CourseId,
-    Price NewPrice) : DomainEvent;
+    Price NewPrice) : IDomainEvent;
