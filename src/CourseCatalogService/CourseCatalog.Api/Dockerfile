@@ -7,7 +7,6 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -16,7 +15,6 @@ COPY ["src/CourseCatalogService/CourseCatalog.Api/CourseCatalog.Api.csproj", "sr
 COPY ["src/CourseCatalogService/CourseCatalog.Application/CourseCatalog.Application.csproj", "src/CourseCatalogService/CourseCatalog.Application/"]
 COPY ["src/CourseCatalogService/CourseCatalog.Contracts/CourseCatalog.Contracts.csproj", "src/CourseCatalogService/CourseCatalog.Contracts/"]
 COPY ["src/CourseCatalogService/CourseCatalog.Domain/CourseCatalog.Domain.csproj", "src/CourseCatalogService/CourseCatalog.Domain/"]
-COPY ["src/SharedKernel/SharedKernel.csproj", "src/SharedKernel/"]
 COPY ["src/CourseCatalogService/CourseCatalog.Infrastructure/CourseCatalog.Infrastructure.csproj", "src/CourseCatalogService/CourseCatalog.Infrastructure/"]
 RUN dotnet restore "./src/CourseCatalogService/CourseCatalog.Api/CourseCatalog.Api.csproj"
 COPY . .
