@@ -2,9 +2,9 @@
 
 namespace CourseCatalog.Domain.Courses.Specifications;
 
-public class CoursesForFreeSpecification : Specification<Course>
+public class FreeCoursesSpecification : Specification<Course>
 {
-    public CoursesForFreeSpecification()
+    public FreeCoursesSpecification()
     {
         Query.Where(course => course.IsFree);
     }
