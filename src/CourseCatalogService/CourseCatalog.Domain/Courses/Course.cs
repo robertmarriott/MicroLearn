@@ -13,8 +13,8 @@ public class Course : AggregateRoot<CourseId>
     private readonly List<Prerequisite> _prerequisites = [];
 
     public InstructorId InstructorId { get; }
-    public string Title { get; private set; }
-    public SkillLevel SkillLevel { get; private set; }
+    public string Title { get; }
+    public SkillLevel SkillLevel { get; }
     public Price Price { get; private set; }
     public bool IsFree => Price.IsFree;
     public DateTime StartDate { get; private set; }
@@ -76,19 +76,6 @@ public class Course : AggregateRoot<CourseId>
             new CourseCreatedEvent(course.InstructorId, course.Id));
 
         return course;
-    }
-
-    public void ChangeTitle(string newTitle)
-    {
-        ArgumentException.ThrowIfNullOrEmpty(newTitle, nameof(newTitle));
-        Title = newTitle;
-        AddDomainEvent(new CourseTitleChangedEvent(Id, Title));
-    }
-
-    public void ChangeSkillLevel(SkillLevel newSkillLevel)
-    {
-        SkillLevel = newSkillLevel;
-        AddDomainEvent(new CourseSkillLevelChangedEvent(Id, SkillLevel));
     }
 
     public void ChangePrice(Price newPrice)
