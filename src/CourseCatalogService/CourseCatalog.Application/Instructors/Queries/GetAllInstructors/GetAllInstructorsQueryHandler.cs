@@ -25,8 +25,8 @@ public class GetAllInstructorsQueryHandler(
 
         return new PaginatedResponse<InstructorResponse>(
             instructorResponses,
-            totalCount,
             request.PageNumber,
-            request.PageSize);
+            request.PageSize,
+            totalCount);
     }
 }

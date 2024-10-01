@@ -43,8 +43,8 @@ public class GetCoursesByInstructorIdQueryHandler(
 
         return new PaginatedResponse<CourseResponse>(
             courseResponses,
-            totalCount,
             request.PageNumber,
-            request.PageSize);
+            request.PageSize,
+            totalCount);
     }
 }
