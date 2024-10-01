@@ -3,6 +3,6 @@
 namespace CourseCatalog.Application.Common.Exceptions;
 
 public class CourseNotFoundException(CourseId courseId)
-    : Exception($"Course with ID {courseId} not found.")
+    : ApplicationException($"Course with ID {courseId} not found.")
 {
 }

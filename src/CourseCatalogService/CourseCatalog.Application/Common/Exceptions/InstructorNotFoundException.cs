@@ -3,6 +3,6 @@
 namespace CourseCatalog.Application.Common.Exceptions;
 
 public class InstructorNotFoundException(InstructorId instructorId)
-    : Exception($"Instructor with ID {instructorId} not found.")
+    : ApplicationException($"Instructor with ID {instructorId} not found.")
 {
 }

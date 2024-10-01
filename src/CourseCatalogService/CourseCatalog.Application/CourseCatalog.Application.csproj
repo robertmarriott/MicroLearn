@@ -17,10 +17,4 @@
     <ProjectReference Include="..\CourseCatalog.Domain\CourseCatalog.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Courses\Queries\" />
-    <Folder Include="Instructors\Commands\" />
-    <Folder Include="Instructors\Queries\" />
-  </ItemGroup>
-
 </Project>
