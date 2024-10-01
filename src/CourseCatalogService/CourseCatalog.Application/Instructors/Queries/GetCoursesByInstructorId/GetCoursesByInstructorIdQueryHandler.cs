@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CourseCatalog.Application.Common.Exceptions;
+using CourseCatalog.Contracts.Common.Responses;
 using CourseCatalog.Contracts.Courses.Responses;
 using CourseCatalog.Domain.Courses;
 using CourseCatalog.Domain.Courses.Specifications;
@@ -12,9 +13,9 @@ public class GetCoursesByInstructorIdQueryHandler(
     ICourseRepository courseRepository,
     IInstructorRepository instructorRepository,
     IMapper mapper)
-    : IRequestHandler<GetCoursesByInstructorIdQuery, IReadOnlyList<CourseResponse>>
+    : IRequestHandler<GetCoursesByInstructorIdQuery, PaginatedResponse<CourseResponse>>
 {
-    public async Task<IReadOnlyList<CourseResponse>> Handle(
+    public async Task<PaginatedResponse<CourseResponse>> Handle(
         GetCoursesByInstructorIdQuery request,
         CancellationToken cancellationToken)
     {
@@ -26,11 +27,24 @@ public class GetCoursesByInstructorIdQueryHandler(
             throw new InstructorNotFoundException(request.InstructorId);
         }
 
+        var coursesByInstructorIdSpecification =
+            new CoursesByInstructorIdSpecification(request.InstructorId);
+
         var courses = await courseRepository.ListAsync(
-            new CoursesByInstructorIdSpecification(request.InstructorId),
+            coursesByInstructorIdSpecification,
             request.PageNumber,
             request.PageSize);
 
-        return mapper.Map<IReadOnlyList<CourseResponse>>(courses);
+        var courseResponses = mapper.Map<IReadOnlyList<CourseResponse>>(
+            courses);
+
+        var totalCount = await courseRepository.CountAsync(
+            coursesByInstructorIdSpecification);
+
+        return new PaginatedResponse<CourseResponse>(
+            courseResponses,
+            totalCount,
+            request.PageNumber,
+            request.PageSize);
     }
 }

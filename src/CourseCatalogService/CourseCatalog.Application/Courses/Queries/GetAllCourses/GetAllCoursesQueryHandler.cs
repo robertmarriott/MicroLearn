@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CourseCatalog.Contracts.Common.Responses;
 using CourseCatalog.Contracts.Courses.Responses;
 using CourseCatalog.Domain.Courses;
 using CourseCatalog.Domain.Courses.Specifications;
@@ -9,17 +10,29 @@ namespace CourseCatalog.Application.Courses.Queries.GetAllCourses;
 public class GetAllCoursesQueryHandler(
     ICourseRepository courseRepository,
     IMapper mapper)
-    : IRequestHandler<GetAllCoursesQuery, IReadOnlyList<CourseResponse>>
+    : IRequestHandler<GetAllCoursesQuery, PaginatedResponse<CourseResponse>>
 {
-    public async Task<IReadOnlyList<CourseResponse>> Handle(
+    public async Task<PaginatedResponse<CourseResponse>> Handle(
         GetAllCoursesQuery request,
         CancellationToken cancellationToken)
     {
+        var allCousesSpecification = new AllCoursesSpecification();
+
         var courses = await courseRepository.ListAsync(
-            new AllCoursesSpecification(),
+            allCousesSpecification,
             request.PageNumber,
             request.PageSize);
 
-        return mapper.Map<IReadOnlyList<CourseResponse>>(courses);
+        var courseResponses = mapper.Map<IReadOnlyList<CourseResponse>>(
+            courses);
+
+        var totalCount = await courseRepository.CountAsync(
+            allCousesSpecification);
+
+        return new PaginatedResponse<CourseResponse>(
+            courseResponses,
+            totalCount,
+            request.PageNumber,
+            request.PageSize);
     }
 }
