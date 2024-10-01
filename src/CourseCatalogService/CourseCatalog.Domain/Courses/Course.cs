@@ -81,6 +81,7 @@ public class Course : AggregateRoot<CourseId>
     public void ChangePrice(Price newPrice)
     {
         Price = newPrice;
+
         AddDomainEvent(new CoursePriceChangedEvent(Id, Price));
     }
 
@@ -93,6 +94,7 @@ public class Course : AggregateRoot<CourseId>
                 nameof(newStartDate));
 
         StartDate = newStartDate;
+
         AddDomainEvent(new CourseStartDateChangedEvent(Id, StartDate));
     }
 
@@ -102,6 +104,7 @@ public class Course : AggregateRoot<CourseId>
             .ThrowIfLessThan(newEndDate, StartDate, nameof(newEndDate));
 
         EndDate = newEndDate;
+
         AddDomainEvent(new CourseEndDateChangedEvent(Id, EndDate));
     }
 
@@ -120,13 +123,16 @@ public class Course : AggregateRoot<CourseId>
         }
 
         CancellationDate = DateTime.UtcNow;
+
         AddDomainEvent(new CourseCancelledEvent(Id, CancellationDate.Value));
     }
 
     public Prerequisite AddPrerequisite(string description)
     {
         var prerequisite = Prerequisite.Create(Id, description);
+
         _prerequisites.Add(prerequisite);
+
         AddDomainEvent(new PrerequisiteAddedEvent(Id, prerequisite.Id));
 
         return prerequisite;
@@ -139,6 +145,7 @@ public class Course : AggregateRoot<CourseId>
             ?? throw new PrerequisiteNotFoundException(prerequisiteId);
 
         _prerequisites.Remove(prerequisite);
+
         AddDomainEvent(new PrerequisiteRemovedEvent(Id, prerequisite.Id));
     }
 }
