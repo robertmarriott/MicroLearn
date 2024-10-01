@@ -16,10 +16,10 @@ public class GetAllCoursesQueryHandler(
         GetAllCoursesQuery request,
         CancellationToken cancellationToken)
     {
-        var allCousesSpecification = new AllCoursesSpecification();
+        var allCoursesSpecification = new AllCoursesSpecification();
 
         var courses = await courseRepository.ListAsync(
-            allCousesSpecification,
+            allCoursesSpecification,
             request.PageNumber,
             request.PageSize);
 
@@ -27,7 +27,7 @@ public class GetAllCoursesQueryHandler(
             courses);
 
         var totalCount = await courseRepository.CountAsync(
-            allCousesSpecification);
+            allCoursesSpecification);
 
         return new PaginatedResponse<CourseResponse>(
             courseResponses,
