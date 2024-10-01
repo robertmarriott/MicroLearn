@@ -3,14 +3,15 @@ using CourseCatalog.Application.Common.Interfaces;
 using CourseCatalog.Domain.Courses;
 using MediatR;
 
-namespace CourseCatalog.Application.Courses.Commands.RemovePrerequisite;
+namespace CourseCatalog.Application.Courses.Commands.RemoveCoursePrerequisite;
 
-public class RemovePrerequisiteCommandHandler(
+public class RemoveCoursePrerequisiteCommandHandler(
     ICourseRepository courseRepository,
-    IUnitOfWork unitOfWork) : IRequestHandler<RemovePrerequisiteCommand, Unit>
+    IUnitOfWork unitOfWork)
+    : IRequestHandler<RemoveCoursePrerequisiteCommand, Unit>
 {
     public async Task<Unit> Handle(
-        RemovePrerequisiteCommand request,
+        RemoveCoursePrerequisiteCommand request,
         CancellationToken cancellationToken)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)

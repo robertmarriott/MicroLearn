@@ -14,4 +14,4 @@ public record class CourseResponse(
     DateTime? CancellationDate,
     bool IsCancelled,
     bool IsOpenForEnrollment,
-    IReadOnlyList<PrerequisiteResponse> Prerequisites);
+    IReadOnlyList<CoursePrerequisiteResponse> Prerequisites);

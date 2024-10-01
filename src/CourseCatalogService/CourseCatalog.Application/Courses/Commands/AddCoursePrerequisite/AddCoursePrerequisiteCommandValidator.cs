@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 
-namespace CourseCatalog.Application.Courses.Commands.AddPrerequisite;
+namespace CourseCatalog.Application.Courses.Commands.AddCoursePrerequisite;
 
-public class AddPrerequisiteCommandValidator
-    : AbstractValidator<AddPrerequisiteCommand>
+public class AddCoursePrerequisiteCommandValidator
+    : AbstractValidator<AddCoursePrerequisiteCommand>
 {
-    public AddPrerequisiteCommandValidator()
+    public AddCoursePrerequisiteCommandValidator()
     {
         RuleFor(command => command.CourseId.Value)
             .NotEmpty()

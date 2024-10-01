@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 
-namespace CourseCatalog.Application.Courses.Commands.RemovePrerequisite;
+namespace CourseCatalog.Application.Courses.Commands.RemoveCoursePrerequisite;
 
-public class RemovePrerequisiteCommandValidator
-    : AbstractValidator<RemovePrerequisiteCommand>
+public class RemoveCoursePrerequisiteCommandValidator
+    : AbstractValidator<RemoveCoursePrerequisiteCommand>
 {
-    public RemovePrerequisiteCommandValidator()
+    public RemoveCoursePrerequisiteCommandValidator()
     {
         RuleFor(command => command.CourseId.Value)
             .NotEmpty()

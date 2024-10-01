@@ -5,16 +5,16 @@ using CourseCatalog.Contracts.Courses.Responses;
 using CourseCatalog.Domain.Courses;
 using MediatR;
 
-namespace CourseCatalog.Application.Courses.Commands.AddPrerequisite;
+namespace CourseCatalog.Application.Courses.Commands.AddCoursePrerequisite;
 
-public class AddPrerequisiteCommandHandler(
+public class AddCoursePrerequisiteCommandHandler(
     ICourseRepository courseRepository,
     IUnitOfWork unitOfWork,
     IMapper mapper)
-    : IRequestHandler<AddPrerequisiteCommand, PrerequisiteResponse>
+    : IRequestHandler<AddCoursePrerequisiteCommand, CoursePrerequisiteResponse>
 {
-    public async Task<PrerequisiteResponse> Handle(
-        AddPrerequisiteCommand request,
+    public async Task<CoursePrerequisiteResponse> Handle(
+        AddCoursePrerequisiteCommand request,
         CancellationToken cancellationToken)
     {
         var course = await courseRepository.GetByIdAsync(request.CourseId)
@@ -24,6 +24,6 @@ public class AddPrerequisiteCommandHandler(
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return mapper.Map<PrerequisiteResponse>(prerequisite);
+        return mapper.Map<CoursePrerequisiteResponse>(prerequisite);
     }
 }
