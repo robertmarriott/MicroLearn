@@ -4,3 +4,14 @@ services:
     build:
       context: .
       dockerfile: src/CourseCatalogService/CourseCatalog.Api/Dockerfile
+
+  mssql:
+    image: mssql
+    build:
+      context: .
+      dockerfile: infra/docker/mssql/Dockerfile
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password"
+    ports:
+      - "1433:1433"
