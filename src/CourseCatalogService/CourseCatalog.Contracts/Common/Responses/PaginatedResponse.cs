@@ -1,12 +1,12 @@
 ﻿namespace CourseCatalog.Contracts.Common.Responses;
 
-public class PaginatedResponse<T>(
-    IEnumerable<T> items,
+public class PaginatedResponse<TResponse>(
+    IEnumerable<TResponse> items,
     int pageNumber,
     int pageSize,
     int totalCount)
 {
-    public IReadOnlyList<T> Items { get; } = items.ToList();
+    public IReadOnlyList<TResponse> Items { get; } = items.ToList();
     public int PageNumber { get; } = pageNumber;
     public int PageSize { get; } = pageSize;
     public int TotalCount { get; } = totalCount;
