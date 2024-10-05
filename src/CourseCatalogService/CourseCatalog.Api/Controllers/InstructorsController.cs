@@ -1,14 +1,31 @@
-﻿namespace CourseCatalog.Api.Controllers;
+﻿using AutoMapper;
+using CourseCatalog.Application.Instructors.Queries.GetAllInstructors;
+using CourseCatalog.Application.Instructors.Queries.GetCoursesByInstructorId;
+using CourseCatalog.Application.Instructors.Queries.GetInstructorById;
+using CourseCatalog.Contracts.Common.Responses;
+using CourseCatalog.Contracts.Courses.Responses;
+using CourseCatalog.Contracts.Instructors.Responses;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CourseCatalog.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 public class InstructorsController(IMediator mediator, IMapper mapper)
     : ControllerBase
 {
+    private const int DefaultPageNumber = 1;
+    private const int DefaultPageSize = 10;
+
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<ActionResult<PaginatedResponse<InstructorResponse>>> GetAll(
+        [FromQuery] int pageNumber = DefaultPageNumber,
+        [FromQuery] int pageSize = DefaultPageSize)
     {
-        var response = await mediator.Send(new GetAllInstructorsQuery());
+        var query = mapper.Map<GetAllInstructorsQuery>((pageNumber, pageSize));
+
+        var response = await mediator.Send(query);
 
         return Ok(response);
     }
@@ -25,7 +42,8 @@ public class InstructorsController(IMediator mediator, IMapper mapper)
     }
 
     [HttpGet("{instructorId:guid}/courses")]
-    public async Task<IActionResult> GetCourses([FromRoute] Guid instructorId)
+    public async Task<ActionResult<PaginatedResponse<CourseResponse>>> GetCourses(
+        [FromRoute] Guid instructorId)
     {
         var query = mapper.Map<GetCoursesByInstructorIdQuery>(instructorId);
 
