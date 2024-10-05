@@ -43,9 +43,12 @@ public class InstructorsController(IMediator mediator, IMapper mapper)
 
     [HttpGet("{instructorId:guid}/courses")]
     public async Task<ActionResult<PaginatedResponse<CourseResponse>>> GetCourses(
-        [FromRoute] Guid instructorId)
+        [FromRoute] Guid instructorId,
+        [FromQuery] int pageNumber = DefaultPageNumber,
+        [FromQuery] int pageSize = DefaultPageSize)
     {
-        var query = mapper.Map<GetCoursesByInstructorIdQuery>(instructorId);
+        var query = mapper.Map<GetCoursesByInstructorIdQuery>(
+            (instructorId, pageNumber, pageSize));
 
         var response = await mediator.Send(query);
 
